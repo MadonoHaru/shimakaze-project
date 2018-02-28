@@ -1,0 +1,16 @@
+body {
+  background-image: url("./images/back.png");
+  background-attachment: fixed;
+}
+body:before{
+  content: "";
+  display: block;
+  position: fixed;
+  background: inherit;
+  filter: blur(5px);
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  z-index: -1;
+}
