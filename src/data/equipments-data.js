@@ -2433,7 +2433,7 @@
      type: 48,
      aa: 11,
      armor: 2,
-     interception: 3,
+     interception: 4,
      antiBomber: 2,
      distance: 4,
      cost: 6,

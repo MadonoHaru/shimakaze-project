@@ -102,6 +102,11 @@ const EquipmentPane = props => {
     };
     equipment.id = id;
     if (visible) visibleEquipments.push(equipment);
+    visibleEquipments.sort((a,b) => {
+      if (a.type - b.type) return a.type - b.type;
+      else if (a.types[3] - b.types[3]) return a.types[3] - b.types[3];
+      else return a.id - b.id;
+    });
   };
   return (
     <div>
@@ -123,7 +128,10 @@ const EquipmentBtn = withRouter(props => {
   return (
     <Button inverted basic style={style} onClick={handleClick} >
       {('types' in equipment) && equipment.types[3] &&
-        <Image src={require(`../images/equipment-icons/${equipment.types[3]}.png`)} inline />
+        <Image
+          src={require(`../images/equipment-icons/${equipment.types[3]}.png`)}
+          inline
+        />
       }
       {equipment.name}
     </Button>
