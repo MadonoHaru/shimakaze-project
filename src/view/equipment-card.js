@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Segment, Image, Button, Input, Icon } from 'semantic-ui-react';
-import { Link , withRouter } from 'react-router-dom';
-import { user, getShipImage } from "./load-data";
+import { Image, Button, Input, Icon } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { user } from "./load-data";
 import { SetProficiencyBtn } from "./proficiency-btn";
 import { SetImprovementBtn } from "./improvement-btn";
 

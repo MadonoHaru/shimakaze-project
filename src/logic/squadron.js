@@ -1,4 +1,3 @@
-import { equipments_data } from '../data/equipments-data';
 import { Equipment } from './equipment';
 
 export class Squadron {

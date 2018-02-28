@@ -1,4 +1,3 @@
-import { equipments_data } from '../data/equipments-data';
 
 export class Equipment {
   constructor(equipment) {

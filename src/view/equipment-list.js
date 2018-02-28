@@ -113,7 +113,6 @@ const EquipmentPane = props => {
 const EquipmentBtn = withRouter(props => {
   const { equipment } = props;
   const handleClick = () => {
-    const keys = [];
     const {build: key0, fleet: key1, ship: key2, equipment: key3} = getParams();
     const shipOfBuild = user.getDataByKey(key0,key1,key2);
     if (!shipOfBuild.equipments[key3]) return false;

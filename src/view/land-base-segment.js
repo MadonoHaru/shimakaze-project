@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Input, Header, Tab } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import { user } from "./load-data";
 import { EquipmentCard } from "./equipment-card";
 

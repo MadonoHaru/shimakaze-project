@@ -59,13 +59,15 @@ const CombinedFleetSwitch = props => {
     build.isCombinedFleet = data.checked;
     update();
   };
+  const style = {verticalAlign: 'middle', margin: 5};
    return (
     <span>
-      <span style={{verticalAlign: 'top', color: 'white', margin: 5}}>
+      <span style={{color: 'white', ...style}}>
         連合艦隊
       </span>
       <Checkbox
         toggle
+        style={style}
         onChange={handleChange}
         defaultChecked={build.isCombinedFleet}
       />
@@ -79,13 +81,14 @@ const EnemySwitch = props => {
     build.isEnemy = data.checked;
     update();
   };
+  const style = {verticalAlign: 'middle', margin: 5};
    return (
-    <span>
-      <span style={{verticalAlign: 'top', color: 'white', margin: 5}}>
+    <span style={{margin: 10}}>
+      <span style={{color: 'white', ...style}}>
         敵判定
       </span>
       <Checkbox
-        toggle
+        style={style}
         onChange={handleChange}
         defaultChecked={build.isEnemy}
       />
