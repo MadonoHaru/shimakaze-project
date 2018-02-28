@@ -35,9 +35,10 @@ export default class ShipList extends Component {
       animation: "show 500ms",
       maxWidth: 1000
     };
-    const middle = {verticalAlign: 'middle'};
+    const middle = {verticalAlign: 'middle', margin: 8};
     return (
       <Segment style={style} inverted >
+        <BackBtn />
         <SearchForm setInput={this.setInput} />
         <Checkbox toggle onChange={this.setAbysall} style={middle} />
           <span style={middle}  >深海棲艦</span>
@@ -56,6 +57,19 @@ export default class ShipList extends Component {
     );
   }
 }
+
+export const BackBtn = withRouter(props => {
+  const {build: bkey} = getParams();
+  const handleClick = () => {
+    if (bkey) props.history.push("/build" + (bkey));
+    else props.history.push("/");
+  };
+  return (
+    <Button inverted basic onClick={handleClick} icon='arrow left' >
+    </Button>
+  );
+});
+
 const ShipTypes = props => {
   const { type, onClick } = props;
   const getTypes = shipType => {

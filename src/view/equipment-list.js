@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { equipments_data } from '../data/equipments-data';
 import { user, getParams } from "./load-data";
 import SearchForm from "./search";
+import { BackBtn } from './ship-list';
 
 export default class EquipmentList extends Component {
   constructor(props) {
@@ -35,11 +36,13 @@ export default class EquipmentList extends Component {
       maxWidth: 1000,
       minHeight: 1000
     };
+    const middle = {verticalAlign: 'middle', margin: 5};
     return (
       <Segment inverted style={style} >
+        <BackBtn />
         <SearchForm setInput={this.setInput} />
-        <Checkbox toggle onChange={this.setAbysall} />
-        敵
+        <Checkbox toggle onChange={this.setAbysall} style={middle} />
+        <span style={middle} >深海装備</span>
         <div>
           {[1,2,3,4,5,6,7,8,9,10,11,15,17,20,34,37,'other'].map(key=>
             <EquipmentTypes onClick={this.setTypes} type={key} key={key} />
@@ -51,6 +54,8 @@ export default class EquipmentList extends Component {
     );
   }
 }
+
+
 
 const EquipmentTypes = props => {
   const { type, onClick } = props;
