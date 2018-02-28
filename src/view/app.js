@@ -58,7 +58,7 @@ class TopMenu extends Component {
     const tabstyle = { backgroundColor: "rgba( 50, 70, 120, 0.85 )", animation: "show 0.5s " };
     return (
       <Menu secondary pointing size='massive' inverted style={tabstyle} >
-        {this.createMenu("Test中","/")}
+        {this.createMenu('テスト中','/')}
         {this.createMenu("編成","/build-list")}
         {this.createMenu("制空シミュ","air-state-simulator")}
       </Menu>

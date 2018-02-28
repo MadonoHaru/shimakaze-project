@@ -89,7 +89,9 @@ const SelectAreaDropdown = props => {
     const world = map_data[worldKey];
     for (let areaKey in world) {
       if (isNaN(+areaKey)) continue;
-      const name = world.name + 'E' + areaKey;
+      let name;
+      if (worldKey > 10) name = world.name + 'E' + areaKey;
+      else name = world.name + areaKey;
       const keys = JSON.stringify([worldKey, areaKey]);
       areaOptions.push({key: name, text: name, value: keys});
     };

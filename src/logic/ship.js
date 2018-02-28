@@ -72,7 +72,7 @@ export class Ship {
     const { equipments } = this;
     equipments[key] = new Equipment(JSON.parse(JSON.stringify(equipment)));
     equipments[key].improvement = 0;
-    equipments[key].proficiency = equipment.id < 500 ? 100 : 0;
+    equipments[key].proficiency = equipment.id < 500 ? 120 : 0;
     equipments[key].slots = this.slots;
     equipments[key].key = key;
     for (let state in equipment) {
