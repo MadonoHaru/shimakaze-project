@@ -331,8 +331,8 @@ const ResultTable = props => {
           if (airState === 1) name = '確保';
           else if (airState === 3) name = '優勢';
           else if (airState === 5) name = '均衡';
-          else if (airState === 7) name = '喪失';
-          else if (airState === 10) name = '劣勢';
+          else if (airState === 7) name = '劣勢';
+          else if (airState === 10) name = '喪失';
           return (
             <Table.Row key={airState} >
               <Table.Cell>{name}</Table.Cell>
