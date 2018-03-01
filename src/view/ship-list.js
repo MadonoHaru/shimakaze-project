@@ -152,6 +152,7 @@ const ShipPane = props => {
 
 const SelectShipBtn = withRouter(props => {
   const { ship } = props;
+
   const src = getShipImage(ship.id);
   const style = {backgroundColor: "rgba( 255, 255, 255, 0.1 )", animation: "show 500ms"};
   const handleClick = () => {
