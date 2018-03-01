@@ -19,7 +19,6 @@ export const simulateAerialCombat = (buildData, enemyBuildData, options) => {
       if (sortieNum <= 0) continue;
       let squadron = new Squadron(build.landBase.squadrons[key]);
       if (!squadron.hasEquipment) continue;
-
       data[num].airState[key + '-1'] = aerialCombat(build, enemyBuild, fleetAA, enemyFleetAA, squadron);
       if (sortieNum > 1) {
         squadron = new Squadron(build.landBase.squadrons[key]);
@@ -47,7 +46,7 @@ export const simulateAerialCombat = (buildData, enemyBuildData, options) => {
 
 export const aerialCombat = (build, enemyBuild, fleetAA, enemyFleetAA, squadron) => {
   const airState = stage1(build, enemyBuild, squadron);
-  stage2(build, enemyBuild, fleetAA, enemyFleetAA, squadron);
+  //stage2(build, enemyBuild, fleetAA, enemyFleetAA, squadron);
   return airState;
 };
 
@@ -56,7 +55,6 @@ export const stage1 = (build, enemyBuild, squadron) => {
   const { fleets: enemyFleets } = enemyBuild;
   const isCombinedFleetCombat = build.isCombinedFleet && enemyBuild.isCombinedFleet;
   let [fighterPower, enemyFighterPower] = [0, 0];
-
 
   if (squadron !== undefined) {
     enemyFighterPower = enemyFleets[1].landBaseCombatFighterPower;
@@ -131,20 +129,18 @@ export const stage2 = (build, enemyBuild, fleetAA, enemyFleetAA, squadron) => {
     aircraftList.push(...squadron.aircraftListOfStage2);
   } else {
     aircraftList.push(...fleets[1].aircraftListOfStage2);
+    enemyAircraftList.push(...enemyFleets[1].aircraftListOfStage2);
     if (isCombinedFleetCombat) {
       aircraftList.push(...fleets[2].aircraftListOfStage2);
+      enemyAircraftList.push(...enemyFleets[2].aircraftListOfStage2);
+    };
+    for (let aircraft of enemyAircraftList) {
+      const rondomKey = Math.floor(Math.random() * shipList.length);
+      const ship = shipList[rondomKey];
+      ship.shotDownOfStage2(aircraft, fleetAA);
     };
   };
-  enemyAircraftList.push(...enemyFleets[1].aircraftListOfStage2);
-  if (isCombinedFleetCombat) {
-    enemyAircraftList.push(...enemyFleets[2].aircraftListOfStage2);
-  };
 
-  for (let aircraft of enemyAircraftList) {
-    const rondomKey = Math.floor(Math.random() * shipList.length);
-    const ship = shipList[rondomKey];
-    ship.shotDownOfStage2(aircraft, fleetAA);
-  };
   for (let aircraft of aircraftList) {
     const rondomKey = Math.floor(Math.random() * enemyShipList.length);
     const enemyShip = enemyShipList[rondomKey];

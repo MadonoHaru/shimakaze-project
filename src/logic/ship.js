@@ -35,7 +35,7 @@ export class Ship {
       } else {
         const maxState = shipData[state + '_max'];
         const initialState = shipData[state + '_initial'];
-        return (maxState - initialState) * level / 99 + initialState;
+        return Math.floor((maxState - initialState) * level / 99 + initialState);
       };
     };
     const handler = {
@@ -47,7 +47,8 @@ export class Ship {
           target.hpMax = getStateByLevel('hp', id, level);
           for (let state of ['evasion','asw','los']) {
             const nextState = getStateByLevel(state, id, level);
-            const equipmentsState = target[state] - target[state + 'Base'];
+            const equipmentsState = target.getEquipmentsStat(state);
+            console.log(equipmentsState);
             target[state + 'Base'] = nextState;
             target[state] = nextState + equipmentsState;
           };
@@ -57,6 +58,13 @@ export class Ship {
     };
 
     return new Proxy(this, handler);
+  }
+  getEquipmentsStat = statName => {
+    let statVal = 0;
+    for (let equipment of this.equipments) {
+      if (statName in equipment) statVal += equipment[statName];
+    };
+    return statVal;
   }
 
   setRange = () => {
@@ -72,7 +80,7 @@ export class Ship {
     const { equipments } = this;
     equipments[key] = new Equipment(JSON.parse(JSON.stringify(equipment)));
     equipments[key].improvement = 0;
-    equipments[key].proficiency = equipment.id < 500 ? 120 : 0;
+    equipments[key].proficiency = equipment.id < 500 ? 100 : 0;
     equipments[key].slots = this.slots;
     equipments[key].key = key;
     for (let state in equipment) {
@@ -146,7 +154,6 @@ export class Ship {
       if (index <= 0) continue;
       if (slots[index - 1] <= 0) continue;
       if (!joinList.includes(equipments[index].type)) continue;
-
       let [maxNum, randomNum, shotDownNum] = [ 0, 0, 0 ];
       if (this.isEnemy) {
         maxNum = 11 - airStateNum;
@@ -244,6 +251,7 @@ export class CreateNewShip {
     this.equipments = [{}];
     for (let index in this.slots) this.equipments.push({});
     const newShip = new Ship(this);
+    newShip.level = shipData.id < 1500 ? 99 : 1;
     if (shipData.id > 1500 && 'equipments' in shipData) {
       for (let index in shipData.equipments) {
         index = parseInt(index, 10);

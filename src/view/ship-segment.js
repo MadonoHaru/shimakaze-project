@@ -65,10 +65,10 @@ const ShipCard = props => {
 };
 
 const RemoveShipBtn = props => {
-  const { keys } = props;
+  const { keys, update } = props;
   const removeClick = () => {
     user.getDataByKey(keys[0],keys[1]).ships[keys[2]] = {};
-    props.update();
+    update();
   };
   return (
     <Button icon="remove" onClick={removeClick} size="mini" inverted basic style={{margin:5}} />
@@ -77,11 +77,13 @@ const RemoveShipBtn = props => {
 
 const ShipStatus = props => {
   const { ship, keys } = props;
-  const test = () => {
-  };
   const style = {display: 'inline-block', margin: 5};
   return (
-    <div onClick={test}>
+    <div>
+      <div style={style} >
+        Lv
+        <InputStat {...props} statName={'level'} />
+      </div>
       {['hp','firepower','torpedo','aa','armor','evasion','asw','speed','los','range','luck'].map(stat =>
         <div key={stat} style={style} >
           <Image src={require(`../images/icons/${stat}.png`)} inline style={{filter: 'invert(100%)'}} />
@@ -94,5 +96,23 @@ const ShipStatus = props => {
       </div>
       {!ship.isEnemy &&ship.id > 1500 && <div style={style} >味方側として計算しています</div>}
     </div>
+  );
+};
+
+const InputStat = props => {
+  const { ship, statName, update } = props;
+  const handleChange = event => {
+    ship[statName] = parseInt(event.target.value, 10);
+    update();
+  };
+  return (
+    <Input
+      type="number"
+      defaultValue={ship[statName]}
+      transparent
+      inverted
+      style={{width: 40}}
+      onChange={handleChange}
+    />
   );
 };

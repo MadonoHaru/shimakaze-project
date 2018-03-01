@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Input, Header, Tab, Checkbox, Label } from 'semantic-ui-react';
+import { Segment, Input, Header, Tab, Checkbox, Label, Button } from 'semantic-ui-react';
 import { user } from "./load-data";
 import { ShipSegment } from "./ship-segment";
 import { EquipmentCard } from "./equipment-card";
@@ -136,9 +136,35 @@ const FleetSegment = props => {
     <Tab.Pane attached={false} style={style} >
       <span>{'制空値' + fleet.fighterPower}</span>
       <span>{'　単縦艦隊防空' + build.getFleetAA('単縦')}</span>
-      {[1,2,3,4,5,6].map((key) =>
-        <ShipSegment build={build} keys={[...keys, key]} update={update} key={key} />
-      )}
+      {fleet.ships.map((ship, key) => {
+        if (key === 0) return;
+        return <ShipSegment build={build} keys={[...keys, key]} update={update} key={key} />
+      })}
+      <AddShipSpaceBtn fleet={fleet} update={update} />
+      <RemoveShipSpaceBtn fleet={fleet} update={update} />
     </Tab.Pane>
+  );
+};
+
+const AddShipSpaceBtn = props => {
+  const { fleet, update } = props;
+  const handleClick = () => {
+    fleet.ships.push({});
+    update();
+  };
+  return (
+    <Button inverted basic icon='plus' onClick={handleClick} />
+  );
+};
+const RemoveShipSpaceBtn = props => {
+  const { fleet, update } = props;
+  const handleClick = () => {
+    console.log(fleet.ships);
+    if (fleet.ships.length <= 7) return;
+    fleet.ships.pop();
+    update();
+  };
+  return (
+    <Button inverted basic icon='minus' onClick={handleClick} />
   );
 };
