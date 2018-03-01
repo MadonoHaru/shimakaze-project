@@ -29,7 +29,6 @@ const SquadronSegment = props => {
       <div style={{textAlign:'left'}} >
         <span style={{margin: 10}} >防空</span>
         <span style={{margin: 10}} >制空{squadron.defenseFighterPower}</span>
-        <span style={{margin: 10}} >撃墜ボーナス{squadron.defenseShotDownBonus}%</span>
       </div>
 
     </div>
