@@ -74,11 +74,6 @@ const LoadBuildDropdown = props => {
           options={buildOptions}
           onChange={handleChange}
         />
-        <SelectFormationDropdown
-          options={options}
-          isCombinedFleet={isCombinedFleet}
-          isEnemy={isEnemy}
-        />
       </div>
       <FighterPower build={build} />
     </div>
@@ -294,8 +289,7 @@ const StartBtn = props => {
   };
   if (user.builds && buildKey) build = user.builds[buildKey];
   const handleClick = event => {
-    const { formation, enemyFormation } = options;
-    if (!enemyBuild || !build || !formation || !enemyFormation) return false;
+    if (!enemyBuild || !build) return false;
     const resultData = simulateAerialCombat(build, enemyBuild, options);
     sessionStorage.resultData = JSON.stringify(resultData);
     update();
