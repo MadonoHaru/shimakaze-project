@@ -28,8 +28,7 @@ export class AirStateSimulator extends Component {
       <div>
         <Header inverted >制空シミュレーター</Header>
         <div style={{color: 'white'}}>
-          <p>深海鶴棲姫、深海鶴棲姫-壊のスロットはよくわかっていないので未対応</p>
-          <p>深海鶴棲姫甲(E7甲ボス2削り)のみ対応</p>
+          <p>E7乙ボス2(深海鶴棲姫乙、深海鶴棲姫-壊乙)は未対応</p>
         </div>
         <LoadBuildDropdown options={options} update={update} />
         <SelectAreaDropdown options={options}  update={update} />

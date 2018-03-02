@@ -30,7 +30,7 @@ export const Home = props => {
         <Header inverted as='h3' >次の実装予定</Header>
         <p>とりあえず火力計算機を予定しています</p>
         <Header inverted as='h3' >開発運営協力</Header>
-        <p>艦これ、HTML5、CSS3、JavaScript(ES6)、React、GirHub全部ド素人なので教えてください</p>
+        <p>艦これ、HTML5、CSS3、JavaScript、React、GitHub全部ド素人なので教えてください</p>
         <Header inverted as='h3' >参考</Header>
         <List >
           <List.Item>
