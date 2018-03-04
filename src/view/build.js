@@ -111,7 +111,7 @@ const BuildTab = props => {
     { menuItem: tab2Name, render: () => <FleetSegment keys={[...keys,2]} update={update} /> },
     { menuItem: '3', render: () => <FleetSegment keys={[...keys,3]} update={update} /> },
     { menuItem: '4', render: () => <FleetSegment keys={[...keys,4]} update={update} /> },
-    { menuItem: '基地', render: () => <LandBaseSegment keys={[...keys,'landBase']} update={update} /> },
+    { menuItem: '基地', render: () => <LandBaseSegment keys={[...keys,'landBase']} update={update} build={build} /> },
   ];
   const handleChange = (event, data) => {
     sessionStorage['activeIndex' + keys[0]] = data.activeIndex;

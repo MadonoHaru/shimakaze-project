@@ -15,10 +15,6 @@ export class AirStateSimulator extends Component {
       backgroundColor: "rgba( 255, 255, 255, 0.1 )",
       animation: "show 500ms",
     };
-    const handleClick = () => {
-      delete user.builds;
-      localStorage.clear();
-    }
     if (!('airStateSimulator' in user)) {
       user.airStateSimulator = {options: {num: 1000, sortieList: [0, 0, 0, 0]}};
     };
@@ -79,7 +75,7 @@ const LoadBuildDropdown = props => {
   );
 };
 
-const SelectAreaDropdown = props => {
+export const SelectAreaDropdown = props => {
   const { options, update } = props;
   const areaOptions = [];
   for (let worldKey in map_data) {
@@ -122,7 +118,7 @@ const SelectAreaDropdown = props => {
   );
 };
 
-const LoadEnemyDropdown = props => {
+export const LoadEnemyDropdown = props => {
   const { options, update } = props;
   const buildOptions = [];
   const { mapKeys } = options;

@@ -4,6 +4,7 @@ import { Button, Icon, Divider, Image, Popup, Transition } from 'semantic-ui-rea
 import { withRouter } from 'react-router-dom';
 import { user, getShipImage } from "./load-data";
 import { CreateNewBuild } from "../logic/build";
+import { Build } from '../logic/build';
 
 export class BuildList extends Component {
   state = {builds: user.builds}
@@ -77,6 +78,14 @@ const OptionsBtn = props => {
     [user.builds[key], user.builds[key + 1]] = [b2,b1];
     props.setBuild();
   };
+  const handleCopy = () => {
+    const key = props.keys[0];
+    const build = user.builds[key];
+    const newBuild = new Build(build);
+    newBuild.name = newBuild.name + '-コピー';
+    user.builds.push(newBuild);
+    props.setBuild();
+  };
   return (
     <Popup
       trigger={<Icon name='options' inverted size='big' />}
@@ -85,6 +94,7 @@ const OptionsBtn = props => {
           <Icon name='remove' size='big' onClick={handleRemove} />
           <Icon name='arrow up' size='big' onClick={handleUp} />
           <Icon name='arrow down' size='big' onClick={handleDown} />
+          <Icon name='copy' size='big' onClick={handleCopy} />
         </div>
       }
       on='click'

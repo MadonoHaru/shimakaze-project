@@ -1,6 +1,18 @@
 import { Build } from "./build";
 import { Squadron } from './squadron';
 
+export const getAirState = (fighterPower, enemyFighterPower) => {
+  if (enemyFighterPower > 0) {
+    const fpRatio = fighterPower / enemyFighterPower;
+    if (fpRatio >= 3) return '確保';
+    else if (fpRatio >= 1.5) return '優勢';
+    else if (fpRatio >= 2 / 3) return '均衡';
+    else if (fpRatio >= 1 / 3) return '劣勢';
+    else return '喪失';
+  };
+  return '確保';
+};
+
 export const simulateAerialCombat = (buildData, enemyBuildData, options) => {
   const { formation, enemyFormation } = options;
   const fleetAA = buildData.getFleetAA(formation);
