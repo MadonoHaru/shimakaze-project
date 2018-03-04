@@ -30,7 +30,7 @@ const SquadronSegment = props => {
       <div style={{textAlign:'left'}}>
         <span style={{margin: 10}} >出撃</span>
         <span style={{margin: 10}} >制空値{squadron.sortieFighterPower}</span>
-          <span style={{margin: 10}} >制空{sortieAirState}</span>
+          <span style={{margin: 10}} >{sortieAirState}</span>
         <span style={{margin: 10}} >距離{squadron.distance}</span>
       </div>
       <div style={{textAlign:'left'}} >
