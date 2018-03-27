@@ -6,12 +6,24 @@ export class Squadron {
     for (let prop in squadron) {
       this[prop] = squadron[prop];
     };
-    for (let index in this.equipments) {
-      this.equipments[index] = new Equipment(this.equipments[index]);
-      this.equipments[index].slots = this.slots;
-      this.equipments[index].key = index;
+    if (this.equipments) {
+      this.equipments = this.equipments.map((equipment, index) => {
+        equipment = new Equipment(equipment);
+        equipment.slots = this.slots;
+        equipment.key = index;
+        equipment.parentObject = this;
+        return equipment;
+      });
+    } else {
+      this.equipments = [];
     };
   }
+
+  toJSON = () => {
+    const cloneSquadron = { ...this };
+    delete cloneSquadron.parentObject;
+    return cloneSquadron;
+  };
 
   setEquipment = (key, equipment) => {
     const { equipments } = this;

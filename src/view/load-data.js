@@ -58,9 +58,6 @@ export const getParams = () => {
     params[kv[0]] = kv[1];
     inter.push(kv[1]);
   };
-  params.interator = function*() {
-    yield* inter;
-  }
   return params;
 }
 

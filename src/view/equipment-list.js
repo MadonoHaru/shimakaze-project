@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {  Button, Segment, Image, Divider, Checkbox } from 'semantic-ui-react';
+import {  Button, Segment, Image, Divider, Checkbox, Popup } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { equipments_data } from '../data/equipments-data';
 import { user, getParams } from "./load-data";
 import SearchForm from "./search";
 import { BackBtn } from './ship-list';
+import { Utility } from '../utility';
 
 export default class EquipmentList extends Component {
   constructor(props) {
@@ -129,22 +130,80 @@ const EquipmentPane = props => {
 const EquipmentBtn = withRouter(props => {
   const { equipment } = props;
   const handleClick = () => {
-    const {build: key0, fleet: key1, ship: key2, equipment: key3} = getParams();
+    const {build: key0, fleet: key1, ship: key2, equipment: key3, page } = getParams();
     const shipOfBuild = user.getDataByKey(key0,key1,key2);
-    if (!shipOfBuild.equipments[key3]) return false;
+    if (!shipOfBuild || !shipOfBuild.equipments[key3]) return false;
     shipOfBuild.setEquipment(key3, equipment);
-    props.history.push("/build" + (key0));
+    if (page) props.history.push("/" + page);
+    else props.history.push("/build" + (key0));
   };
   const style = {height:80,width:200, animation: "show 500ms",verticalAlign:'middle'};
   return (
-    <Button inverted basic style={style} onClick={handleClick} >
-      {('types' in equipment) && equipment.types[3] &&
-        <Image
-          src={require(`../images/equipment-icons/${equipment.types[3]}.png`)}
-          inline
-        />
+    <Popup
+      trigger={
+        <Button inverted basic style={style} onClick={handleClick} >
+          {('types' in equipment) && equipment.types[3] &&
+            <Image
+              src={require(`../images/equipment-icons/${equipment.types[3]}.png`)}
+              inline
+            />
+          }
+          {equipment.name}
+        </Button>
       }
-      {equipment.name}
-    </Button>
+      content={<PopupEquipmentStatus equipment={equipment} />}
+      style={{backgroundColor: "rgba( 50, 50, 50, 0.8 )"}}
+      basic
+    />
   );
 });
+
+const PopupEquipmentStatus = props => {
+  const { equipment } = props;
+  const statNameList = [];
+  for (let statName in equipment) {
+    if (['id','name','type','types','added_on'].includes(statName)) continue;
+    statNameList.push(statName);
+  };
+  return (
+    <div>
+      {statNameList.map(statName =>
+        <div style={{color: 'white'}} key={statName} >
+          <EquipmentIconImage statName={statName} />
+          {equipment[statName]}
+        </div>
+      )}
+    </div>
+  )
+};
+
+const EquipmentIconImage = props => {
+  let { statName } = props;
+  let src;
+  try {
+    src = Utility.getStatIconSrc(statName);
+  } catch (e) {
+    src = false;
+  };
+  if (src) return <Image src={src} style={{filter: 'invert(100%)'}} inline />
+  switch (statName) {
+    case 'bomb':
+      statName = '爆装';
+      break;
+    case 'distance':
+      statName = '距離';
+      break;
+    case 'interception':
+      statName = '迎撃';
+      break;
+    case 'antiBomber':
+      statName = '対爆';
+      break;
+    case 'cost':
+      statName = 'コスト';
+      break;
+  }
+  return (
+    <span>{statName}</span>
+  );
+};

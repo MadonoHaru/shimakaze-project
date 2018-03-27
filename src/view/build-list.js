@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
-import { Button, Icon, Divider, Image, Popup, Transition } from 'semantic-ui-react';
+import { Button, Icon, Divider, Image, Popup, Transition, Modal, Header, TextArea } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { user, getShipImage } from "./load-data";
-import { CreateNewBuild } from "../logic/build";
+import { CreateNewBuild, CreateBuildByDeckBuilderData } from "../logic/build";
 import { Build } from '../logic/build';
 
 export class BuildList extends Component {
@@ -20,6 +20,7 @@ export class BuildList extends Component {
           )
         }
         <CreateBuildBtn builds={builds} />
+        <LoadBuildByDeckBuilder builds={builds} />
       </div>
     );
   }
@@ -40,6 +41,68 @@ const CreateBuildBtn = withRouter((props) => {
   )
 });
 
+const LoadBuildByDeckBuilder = withRouter((props) => (
+  <ModalAddBuildByDeckBuilder {...props} />
+));
+
+const LoadBuildByDeckBuilderBtn = props => (
+  <Button size="huge" inverted basic onClick={props.onClick} >
+    <Icon name="plus" />
+    デッキビルダー形式を読み込む
+  </Button>
+);
+
+class ModalAddBuildByDeckBuilder extends Component {
+  state = { modalOpen: false }
+  deckBuilderData = false
+  handleOpen = () => this.setState({ modalOpen: true })
+  handleClose = () => this.setState({ modalOpen: false })
+  handleChange = (event, data) => this.deckBuilderData = data.value
+  handleLoad = () => {
+    if (!this.deckBuilderData) {
+      alert("データを入力してください");
+      return false;
+    };
+    try {
+      const { builds, history } = this.props;
+      const newBuild = new CreateBuildByDeckBuilderData(this.deckBuilderData);
+      newBuild.name = 'new' + builds.length;
+      console.log(newBuild);
+      builds.push(newBuild);
+      history.push("/build" + (builds.length - 1));
+    } catch (e) {
+      console.log(ClipboardEvent.clipboardData);
+      alert("データが不正です");
+    };
+  }
+  render() {
+    return (
+      <Modal
+        trigger={<LoadBuildByDeckBuilderBtn onClick={this.handleOpen} />}
+        open={this.state.modalOpen}
+        onClose={this.handleClose}
+        basic
+        size='small'
+      >
+        <Header icon='keyboard' content='デッキビルダー形式のデータを入力してください' />
+        <Modal.Content>
+          <TextArea
+            onChange={this.handleChange}
+            style={{width:500, color: 'white', backgroundColor: "rgba( 200, 200, 200, 0.2 )"}}
+          />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color='blue' onClick={this.handleClose} inverted basic >
+            <Icon name='reply' /> Cancel
+          </Button>
+          <Button color='orange' onClick={this.handleLoad} inverted basic >
+            <Icon name='download' /> Load
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    )
+  }
+}
 const SelectBuildBtn = withRouter((props) => {
   if (!props.build.name) return false;
   const click = () => {

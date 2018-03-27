@@ -5,9 +5,12 @@ import './app.css';
 import ShipList from './ship-list';
 import EquipmentList from './equipment-list';
 import { BuildList } from './build-list';
-import { Build } from './build';
+import { BuildPage } from './build-segment';
+import { ShipStatusPage } from './ship-status-page';
 import { Home } from './home';
 import { AirStateSimulator } from './air-state-simulator';
+import { Forum } from './forum';
+import { TestPage } from './test';
 
 export default class App extends Component {
   render() {
@@ -21,8 +24,11 @@ export default class App extends Component {
               <Route path="/ship-list" component={ShipList} />
               <Route path="/equipment-list" component={EquipmentList} />
               <Route exact path="/build-list" component={BuildList} />
-              <Route path="/build:key" component={Build} />
+              <Route path="/build:key" component={BuildPage} />
+              <Route path="/ship-status" component={ShipStatusPage} />
               <Route path="/air-state-simulator" component={AirStateSimulator} />
+              <Route path="/forum" component={Forum} />
+              <Route path="/test" component={TestPage} />
             </Switch>
           </Pane>
         </div>
@@ -60,7 +66,7 @@ class TopMenu extends Component {
       <Menu secondary pointing size='massive' inverted style={tabstyle} >
         {this.createMenu('テスト中','/')}
         {this.createMenu("編成","/build-list")}
-        {this.createMenu("制空シミュ","air-state-simulator")}
+        {this.createMenu("制空シミュ","/air-state-simulator")}
       </Menu>
     )
   }

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { Image, Button, Input, Icon } from 'semantic-ui-react';
+import { Image, Button, Input, Icon, Label } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import { user } from "./load-data";
 import { SetProficiencyBtn } from "./proficiency-btn";
 import { SetImprovementBtn } from "./improvement-btn";
 
 export const EquipmentCard = props => {
-  const { keys, expansion, update } = props;
+  const { holder, equipment, keys, expansion } = props;
   if (isNaN(keys[3]) || (keys[3] === 0 && !expansion)) return false;
-  const equipment = user.getDataByKey(...keys);
   const style = {display:'inline',verticalAlign:'middle'};
+  const isFirefox = window.navigator.userAgent.toLowerCase().includes('firefox');
   return (
     <div style={style} >
     { equipment.id
       ?
+        isFirefox ? <EquipmentCardOfFirefox {...props} equipment={equipment} />
+        :
         <Button inverted basic compact style={{position: "relative",padding:5,width:250,height:60,...style }}>
           <div style={{width:160,textAlign:'center'}}>
             {('types' in equipment) && equipment.types[3] &&
@@ -21,31 +22,48 @@ export const EquipmentCard = props => {
             }
             {equipment.name}
           </div>
-          <SlotInput keys={keys} />
-          <SetImprovementBtn equipment={equipment} update={update} />
-          <SetProficiencyBtn equipment={equipment} update={update} />
-          <RemoveEquipmentBtn keys={keys} update={update} />
+          <SlotInput {...props} />
+          <SetImprovementBtn {...props} />
+          <SetProficiencyBtn {...props} />
+          <RemoveEquipmentBtn {...props} />
         </Button>
       :
-        <AddEquipmentBtn keys={keys} />
+        <AddEquipmentBtn {...props} />
     }
     </div>
   );
 };
 
+const EquipmentCardOfFirefox = props => {
+  const { equipment } = props;
+  return (
+    <Label basic style={{position: "relative",padding:5,width:250,height:60,color:'white', backgroundColor: "rgba( 200, 200, 200, 0.15 )",verticalAlign:'middle'}} >
+      <div style={{width:160,textAlign:'center'}}>
+        {('types' in equipment) && equipment.types[3] &&
+          <Image src={require(`../images/equipment-icons/${equipment.types[3]}.png`)} inline />
+        }
+        {equipment.name}
+      </div>
+      <SlotInput {...props} />
+      <SetImprovementBtn {...props} />
+      <SetProficiencyBtn {...props} />
+      <RemoveEquipmentBtn {...props} />
+    </Label>
+  );
+};
+
 const AddEquipmentBtn = withRouter(props => {
-  const { keys } = props;
-  const ship = user.getDataByKey(keys[0],keys[1],keys[2]);
+  const { holder, keys } = props;
   const content = keys[3] === 0
     ? '補強増設'
-    : `装備(${ship.slots[keys[3] - 1]})`;
+    : `装備(${holder.slots[keys[3] - 1]})`;
   const handleClick = () => {
     if (keys[3] === undefined) {
-      keys[3] = ship.equipments.push({});
+      keys[3] = holder.equipments.push({});
     };
-    props.history.push(
-      `/equipment-list?build=${keys[0]}&fleet=${keys[1]}&ship=${keys[2]}&equipment=${keys[3]}`
-    );
+    let query = `?build=${keys[0]}&fleet=${keys[1]}&ship=${keys[2]}&equipment=${keys[3]}`;
+    if (props.isShipStatusPage) query += '&page=ship-status';
+    props.history.push('equipment-list' + query);
   };
   return (
       <Button
@@ -61,10 +79,9 @@ const AddEquipmentBtn = withRouter(props => {
 
 
 const RemoveEquipmentBtn = props => {
-  const { keys, update } = props;
+  const { holder, keys, update } = props;
   const handleRemove = () => {
-    const ship = user.getDataByKey(keys[0],keys[1],keys[2]);
-    ship.removeEquipment(keys[3]);
+    holder.removeEquipment(keys[3]);
     update();
   };
   return (
@@ -77,15 +94,12 @@ const RemoveEquipmentBtn = props => {
 };
 
 const SlotInput = props => {
-  const { keys } = props;
-  const key = keys[3];
-  if (!key) return null
-  const slots = user.getDataByKey(keys[0],keys[1],keys[2]).slots;
-  const handleChange = event => slots[key - 1] = parseInt(event.target.value, 10);
+  const { equipment } = props;
+  const handleChange = event => equipment.slot = parseInt(event.target.value, 10);
   return (
     <Input
       type="number"
-      defaultValue={slots[key - 1]}
+      defaultValue={equipment.slot}
       transparent
       inverted
       style={{width: 40,position: "absolute",left:8,bottom:5}}

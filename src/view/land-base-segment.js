@@ -10,7 +10,9 @@ export const LandBaseSegment = props => {
   const options = {};
   return (
     <Segment compact style={{backgroundColor: "rgba( 200, 200, 200, 0.05 )"}}>
-      {[1,2,3].map(key => <SquadronSegment keys={[...keys,key]} update={update} key={key} />)}
+      {[1,2,3].map(key =>
+        <SquadronSegment keys={[...keys,key]} update={update} key={key} />
+      )}
       <InputEnemyFighterPower update={update} />
     </Segment>
   );
@@ -20,12 +22,13 @@ const SquadronSegment = props => {
   const { keys, update } = props;
   const squadron = user.getDataByKey(...keys);
   const sortieAirState = getAirState(squadron.sortieFighterPower, sessionStorage.enemyFighterPower);
-  const difenseAirState = getAirState(squadron.defenseFighterPower, sessionStorage.enemyFighterPower);
   return (
     <div style={{display: 'inline-block', margin: 10, textAlign:'center', color: 'white'}}>
       第{keys[2]}基地航空隊
       {[1,2,3,4].map(key =>
-        <div key={key}><EquipmentCard keys={[...keys,key]} update={update} /></div>
+        <div key={key}>
+          <EquipmentCard holder={squadron} equipment={squadron.equipments[key]} keys={[...keys,key]} update={update} />
+        </div>
       )}
       <div style={{textAlign:'left'}}>
         <span style={{margin: 10}} >出撃</span>
@@ -36,7 +39,6 @@ const SquadronSegment = props => {
       <div style={{textAlign:'left'}} >
         <span style={{margin: 10}} >防空</span>
         <span style={{margin: 10}} >制空値{squadron.defenseFighterPower}</span>
-        <span style={{margin: 10}} >制空{difenseAirState}</span>
       </div>
 
     </div>

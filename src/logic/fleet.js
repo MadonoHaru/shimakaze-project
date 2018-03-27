@@ -5,10 +5,21 @@ export class Fleet {
     for (let prop in fleet) {
       this[prop] = fleet[prop];
     };
-    for (let index in this.ships) {
-      this.ships[index] = new Ship(this.ships[index]);
-      this.ships[index].position = [this.key, index];
+    if (this.ships) {
+      this.ships = this.ships.map((ship, index) => {
+        ship = new Ship(ship);
+        ship.position = [this.key, index];
+        ship.parentObject = this;
+        return ship;
+      });
+    } else {
+      this.ships = [];
     };
+  }
+  toJSON = () => {
+    const cloneFleet = { ...this };
+    delete cloneFleet.parentObject;
+    return cloneFleet;
   }
 
   setShip = (key, shipData) => {
@@ -80,6 +91,22 @@ export class Fleet {
       };
     };
     return list;
+  }
+
+  countShipType = (...typeList) => {
+    return this.ships.filter(ship => typeList.includes(ship.type)).length;
+  }
+
+  get supportType() {
+    if (this.countShipType(2) < 2) return false;
+    if (this.countShipType(5,8,9,12) > 0) {
+      if (this.countShipType(7,11,16,17,18) >= 2) return 'aerial';
+      if (this.countShipType(8,9,10,12) >= 2 || this.countShipType(5,6,8,9,10,12) >= 4) return 'shelling';
+    } else {
+      if (this.countShipType(7,11,18) > 0) return 'aerial';
+      if (this.countShipType(6,10,16,17,22) >= 2) return 'aerial';
+    };
+    return 'torpedo';
   }
 
 }

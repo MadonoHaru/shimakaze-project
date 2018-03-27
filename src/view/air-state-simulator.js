@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Segment, Table, Button, Header, Dropdown, Input, Checkbox } from 'semantic-ui-react';
+import { Segment, Table, Button, Header, Dropdown, Input, Checkbox, Modal, Progress, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { user } from "./load-data";
 import { Build, CreateBuildByBuildData } from "../logic/build";
-import { simulateAerialCombat } from "../logic/aerial-combat";
+import { simulateAirState } from "../logic/aerial-combat";
 import { map_data } from '../data/map-data';
 
 
@@ -20,18 +20,19 @@ export class AirStateSimulator extends Component {
     };
     const { options } = user.airStateSimulator;
     const { update } = this;
+    const { build } = this.props;
+    const simProps = { options, update, build };
     return (
       <div>
-        <Header inverted >制空シミュレーター</Header>
-        <div style={{color: 'white'}}>
-          <p>E7乙ボス2(深海鶴棲姫乙、深海鶴棲姫-壊乙)は未対応</p>
-        </div>
-        <LoadBuildDropdown options={options} update={update} />
-        <SelectAreaDropdown options={options}  update={update} />
-        <LandBaseSwitch options={options} />
+        {
+          build ? <FighterPower build={build} />
+          : <LoadBuildDropdown { ...simProps } />
+        }
+        <SelectAreaDropdown { ...simProps } />
+        <LandBaseSwitch { ...simProps } />
         <div style={{margin: 5, marginTop: 20}} >
-          <NumInput options={options} />
-          <StartBtn options={options} update={update} />
+          <NumInput { ...simProps } />
+          <ModalProgressOfSimulation { ...simProps } />
         </div>
         <ResultTable />
       </div>
@@ -48,8 +49,11 @@ const LoadBuildDropdown = props => {
     buildOptions.push({key: buildKey, text: build.name, value: buildKey});
   };
   let [build, isCombinedFleet] = [false, false];
-  if (options.buildKey && user.builds) {
-    build = user.builds[options.buildKey];
+  let visibleBuildKey = false;
+  if (isEnemy) visibleBuildKey = options.enemyKey;
+  else visibleBuildKey = options.buildKey
+  if (visibleBuildKey && user.builds) {
+    build = user.builds[visibleBuildKey];
     if (build) isCombinedFleet = build.isCombinedFleet;
   };
   const style = {color: 'white', margin: 10};
@@ -70,7 +74,7 @@ const LoadBuildDropdown = props => {
           onChange={handleChange}
         />
       </div>
-      <FighterPower build={build} />
+      <FighterPower build={build} isEnemy={isEnemy} />
     </div>
   );
 };
@@ -157,24 +161,31 @@ export const LoadEnemyDropdown = props => {
           onChange={handleChange}
         />
       </div>
-      <FighterPower build={build} />
+      <FighterPower build={build} isEnemy />
     </div>
   );
 };
 
 const FighterPower = props => {
-  const { build } = props;
+  const { build, isEnemy } = props;
   let isCombinedFleet = false;
   let [fighterPower, fighterPower1, fighterPower2] = [0, 0, 0];
+  let [landBaseCombatFighterPower, landBaseCombatFighterPower1, landBaseCombatFighterPower2] = [0, 0, 0];
   if (build) {
     isCombinedFleet = build.isCombinedFleet;
     fighterPower1 = build.fleets[1].fighterPower;
     fighterPower2 = build.fleets[2].fighterPower;
-    fighterPower = fighterPower1 + fighterPower2;
+    fighterPower = fighterPower1;
+    if (isCombinedFleet) fighterPower += fighterPower2;
+    landBaseCombatFighterPower1 = build.fleets[1].landBaseCombatFighterPower;
+    landBaseCombatFighterPower2 = build.fleets[2].landBaseCombatFighterPower;
+    landBaseCombatFighterPower = landBaseCombatFighterPower1;
+    if (isCombinedFleet) landBaseCombatFighterPower += landBaseCombatFighterPower2;
   }
   return (
     <div style={{color: 'white', margin: 10}} >
     {'合計制空' + fighterPower}
+    {isEnemy ? '　基地戦時' + landBaseCombatFighterPower : null}
       {isCombinedFleet && <span>
         {`　第一制空${fighterPower1}　第二制空${fighterPower2}`}
       </span>}
@@ -266,6 +277,7 @@ const NumInput = props => {
       <span style={{color: 'white', margin: 5}}>試行回数</span>
       <Input
         type='number'
+        min='1'
         defaultValue={options.num}
         onChange={handleChange}
       />
@@ -273,35 +285,108 @@ const NumInput = props => {
   );
 };
 
-const StartBtn = props => {
-  const { options, update } = props;
-  const { buildKey, enemyKey, enemyBuildData, mapKeys, num } = options;
-  let build, enemyBuild;
-  if (mapKeys === 'self' && enemyKey) {
-    enemyBuild = user.builds[enemyKey];
-  } else if (typeof enemyBuildData === 'object') {
-    enemyBuild = new CreateBuildByBuildData(enemyBuildData);
-  };
-  if (user.builds && buildKey) build = user.builds[buildKey];
-  const handleClick = event => {
-    if (!enemyBuild || !build) return false;
-    const resultData = simulateAerialCombat(build, enemyBuild, options);
-    sessionStorage.resultData = JSON.stringify(resultData);
-    update();
-  };
-  return (
-    <Button inverted basic onClick={handleClick} >
-      シミュレート開始
-    </Button>
-  );
-};
+class ModalProgressOfSimulation extends Component {
+  state = { percent: 0 };
+  num = 0;
+  resultData = {};
+  resultPlus = (result1, result2) => {
+    for (let time in result1) {
+      if (time === 'sortieList' || time === 'num') continue;
+      for (let state in result1[time]) {
+        result1[time][state] += result2[time][state];
+      };
+    };
+  }
+  sim = (build, enemyBuild, resultData) => {
+    if (this.state.cancel) {
+      this.setState({ open: false, cancel: false });
+      this.num = 0;
+      return false;
+    };
+    const { options, update } = this.props;
+
+    const options100 = JSON.parse(JSON.stringify(options));
+    options100.num = 100;
+    const maxNum = this.props.options.num;
+    if (maxNum - this.num >= 100) {
+      this.resultPlus(resultData, simulateAirState(build, enemyBuild, options100));
+      this.num += 100;
+    } else {
+      const optionsN = JSON.parse(JSON.stringify(options));
+      optionsN.num = maxNum % 100;
+      this.resultPlus(resultData, simulateAirState(build, enemyBuild, optionsN));
+      this.num += maxNum % 100;
+    };
+    this.setState({percent: Math.floor(this.num * 100 / maxNum)});
+    if (this.num < maxNum) {
+      setTimeout(() => this.sim(build, enemyBuild, resultData), 0);
+    } else {
+      sessionStorage.resultData = JSON.stringify(resultData);
+      this.num = 0;
+      this.setState({ open: false });
+      update();
+    };
+  }
+  handleClick = event => {
+    this.num = 0;
+    const { buildKey, enemyKey, enemyBuildData, mapKeys, num, sortieList } = this.props.options;
+    let build, enemyBuild;
+    console.log(this.props.options);
+    if (this.props.build) build = this.props.build;
+    else if (user.builds && buildKey) build = user.builds[buildKey];
+    if (mapKeys === 'self' && enemyKey) {
+      enemyBuild = user.builds[enemyKey];
+    } else if (typeof enemyBuildData === 'object') {
+      enemyBuild = new CreateBuildByBuildData(enemyBuildData);
+    };
+    if (!enemyBuild || !build || num < 1) {
+      alert("必要事項を入力してください");
+      this.setState({ open: false, percent: 0 });
+      return false;
+    };
+
+    this.setState({ open: true, percent: 0 });
+    const resultData = {};
+    for (let prop of ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', 'main']) {
+      resultData[prop] = {'1': 0, '3': 0, '5': 0, '7': 0, '10': 0};
+    };
+    resultData.sortieList = sortieList;
+    resultData.num = num;
+    this.sim(build, enemyBuild, resultData);
+  }
+  handleCancel = () => this.setState({ open: false, cancel: true });
+  render() {
+    return (
+      <Modal
+        open={this.state.open}
+        trigger={
+          <Button basic inverted onClick={this.handleClick} >シミュレート開始</Button>
+        }
+        basic
+        size='small'
+      >
+        <Header>
+          <Icon loading name='spinner' />
+        </Header>
+        <Modal.Content>
+          <Progress percent={this.state.percent} progress color='orange' />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button basic color='red' inverted onClick={this.handleCancel} >
+            <Icon name='remove' /> Cancel
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    )
+  }
+}
 
 const ResultTable = props => {
   if (!sessionStorage.resultData) return false;
   const resultData = JSON.parse(sessionStorage.resultData);
+  if (!resultData.sortieList) return false;
   const { sortieList } = resultData;
   const displayList = [];
-  console.log(sortieList);
   for (let index in sortieList) {
     const sortieNum = sortieList[index];
     if (sortieNum > 0) displayList.push(index + '-1');

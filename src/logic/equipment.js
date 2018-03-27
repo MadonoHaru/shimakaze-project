@@ -4,6 +4,11 @@ export class Equipment {
     for (let prop in equipment) {
       this[prop] = equipment[prop];
     };
+    this.toJSON = () => {
+      const cloneEquipment = { ...this };
+      delete cloneEquipment.parentObject;
+      return cloneEquipment;
+    };
   }
 
   get slot() {
@@ -16,39 +21,39 @@ export class Equipment {
   }
 
   get weightAA() {
-    if (!this.aa) return 0;
+    if (!this.antiAir) return 0;
     const type = this.type;
     let [coefA, coefB] = [0, 0];
     if (type === 21) {
       coefA = 3;
-      coefB = this.aa <= 7 ? 2 : 3;
+      coefB = this.antiAir <= 7 ? 2 : 3;
     } else if (type === 36 || this.types[3] === 16) {
       coefA = 2;
-      coefB = this.aa <= 7 ? 1 : 1.5;
+      coefB = this.antiAir <= 7 ? 1 : 1.5;
     } else if ([12,13,93].includes(type)) {
       coefA = 1.5;
     }
-    return 2 * (coefA * this.aa + coefB * Math.sqrt(this.improvement));
+    return 2 * (coefA * this.antiAir + coefB * Math.sqrt(this.improvement));
   }
 
   get fleetAABonus() {
-    if (!this.aa || this.aa < 1) return 0;
+    if (!this.antiAir || this.antiAir < 1) return 0;
     const type = this.type;
     let [coefA, coefB] = [0, 0];
     if (type === 36 || this.types[3] === 16) {
       coefA = 0.35;
-      coefB = this.aa <= 7 ? 2 : 3;
+      coefB = this.antiAir <= 7 ? 2 : 3;
     } else if (type === 18) {
       coefA = 0.6;
     } else if ([12,13,93].includes(type)) {
       coefA = 0.4;
-      if (this.aa > 1) coefB = 1.5;
+      if (this.antiAir > 1) coefB = 1.5;
     } else if (this.name === '46cm三連装砲') {
       coefA = 0.25;
     } else {
       coefA = 0.2;
     }
-    return coefA * this.aa + coefB * Math.sqrt(this.improvement);
+    return coefA * this.antiAir + coefB * Math.sqrt(this.improvement);
   }
 
   getFighterPower = val => {
@@ -80,14 +85,14 @@ export class Equipment {
         break;
       default: return 0;
     };
-    let aa = this.aa ? this.aa : 0;
-    aa += improvementCoef * this.improvement;
-    return Math.floor(aa * Math.sqrt(val) + bonus + Math.sqrt(proficiency / 10));
+    let antiAir = this.antiAir ? this.antiAir : 0;
+    antiAir += improvementCoef * this.improvement;
+    return Math.floor(antiAir * Math.sqrt(val) + bonus + Math.sqrt(proficiency / 10));
   }
 
   getLandBaseSortieFighterPower = val => {
     if (!val) return 0;
-    let { aa, interception, proficiency } = this;
+    let { antiAir, interception, proficiency } = this;
     let [bonus, improvementCoef] = [0, 0];
     switch (this.type) {
       case 6:
@@ -121,15 +126,15 @@ export class Equipment {
         break;
       default: return 0;
     };
-    aa = aa ? aa : 0;
-    aa += interception ? interception * 1.5 : 0;
-    aa += improvementCoef * this.improvement;
-    return Math.floor(aa * Math.sqrt(val) + bonus + Math.sqrt(proficiency / 10));
+    antiAir = antiAir ? antiAir : 0;
+    antiAir += interception ? interception * 1.5 : 0;
+    antiAir += improvementCoef * this.improvement;
+    return Math.floor(antiAir * Math.sqrt(val) + bonus + Math.sqrt(proficiency / 10));
   }
 
   getLandBaseDefenseFighterPower = val => {
     if (!val) return 0;
-    let { aa, interception, antiBomber, proficiency } = this;
+    let { antiAir, interception, antiBomber, proficiency } = this;
     let [bonus, improvementCoef] = [0, 0];
     switch (this.type) {
       case 6:
@@ -163,11 +168,49 @@ export class Equipment {
         break;
       default: return 0;
     };
-    aa = aa ? aa : 0;
-    aa += interception ? interception : 0;
-    aa += antiBomber ? antiBomber * 2 : 0;
-    aa += improvementCoef * this.improvement;
-    return Math.floor(aa * Math.sqrt(val) + bonus + Math.sqrt(proficiency / 10));
+    antiAir = antiAir ? antiAir : 0;
+    antiAir += interception ? interception : 0;
+    antiAir += antiBomber ? antiBomber * 2 : 0;
+    antiAir += improvementCoef * this.improvement;
+    return Math.floor(antiAir * Math.sqrt(val) + bonus + Math.sqrt(proficiency / 10));
   }
 
+  get improvementShellingMod() {
+    if (this.improvement <= 0) return 0;
+    let sqrtImp = Math.sqrt(this.improvement);
+    if (this.firepower > 12) {
+      return 1.5 * sqrtImp;
+    }
+    const { type } = this;
+    if ([14,15,40].includes(type)) return 0.75 * sqrtImp;
+    if (type >= 5 && type <= 17 || [22,27,28].includes(type)) return 0;
+    return sqrtImp;
+  }
+
+}
+
+export const getInnerProficiencyByLevel = (level) => {
+  switch (level) {
+    case 0: return 0;
+    case 1: return 10;
+    case 2: return 25;
+    case 3: return 40;
+    case 4: return 55;
+    case 5: return 70;
+    case 6: return 85;
+    case 7: return 100;
+  }
+  return 0;
+}
+
+export const getProficiencyLevelByInner = (inner) => {
+  if (typeof inner !== "number") return 0;
+  if (inner >= 100) return 7;
+  if (inner >= 85) return 6;
+  if (inner >= 70) return 5;
+  if (inner >= 55) return 4;
+  if (inner >= 40) return 3;
+  if (inner >= 25) return 2;
+  if (inner >= 10) return 1;
+  return 0;
 }

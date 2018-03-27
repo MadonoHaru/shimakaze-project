@@ -13,14 +13,13 @@ export const getAirState = (fighterPower, enemyFighterPower) => {
   return '確保';
 };
 
-export const simulateAerialCombat = (buildData, enemyBuildData, options) => {
-  const { formation, enemyFormation } = options;
-  const fleetAA = buildData.getFleetAA(formation);
-  const enemyFleetAA = enemyBuildData.getFleetAA(enemyFormation);
-  const data = {};
+export const simulateAirState = (buildData, enemyBuildData, options) => {
+  const resultData = {};
+  for (let prop of ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', 'main']) {
+    resultData[prop] = {'1': 0, '3': 0, '5': 0, '7': 0, '10': 0};
+  };
 
   for (let num = options.num;num--;) {
-    data[num] = {airState: {}};
     const build = new Build(buildData);
     build.isEnemy = false;
     const enemyBuild = new Build(enemyBuildData);
@@ -31,30 +30,21 @@ export const simulateAerialCombat = (buildData, enemyBuildData, options) => {
       if (sortieNum <= 0) continue;
       let squadron = new Squadron(build.landBase.squadrons[key]);
       if (!squadron.hasEquipment) continue;
-      data[num].airState[key + '-1'] = aerialCombat(build, enemyBuild, fleetAA, enemyFleetAA, squadron);
+      resultData[key + '-1'][stage1(build, enemyBuild, squadron)]++;
       if (sortieNum > 1) {
         squadron = new Squadron(build.landBase.squadrons[key]);
-        data[num].airState[key + '-2'] = aerialCombat(build, enemyBuild, fleetAA, enemyFleetAA, squadron);
+        resultData[key + '-2'][stage1(build, enemyBuild, squadron)]++;
       };
       build.landBase.squadrons[key] = squadron;
     };
-
-    data[num].airState['main'] = aerialCombat(build, enemyBuild, fleetAA, enemyFleetAA);
-
+    resultData['main'][stage1(build, enemyBuild)]++;
   };
 
-  const resultData = {};
-  resultData.sortieList = options.sortieList.concat();
-  for (let prop of ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', 'main']) {
-    resultData[prop] = {'1': 0, '3': 0, '5': 0, '7': 0, '10': 0};
-    for (let index in data) {
-      const { airState } = data[index];
-      if (airState[prop]) resultData[prop][airState[prop]]++;
-    };
-  };
   resultData.num = options.num;
+  resultData.sortieList = options.sortieList;
   return resultData;
 };
+
 
 export const aerialCombat = (build, enemyBuild, fleetAA, enemyFleetAA, squadron) => {
   const airState = stage1(build, enemyBuild, squadron);
@@ -71,7 +61,7 @@ export const stage1 = (build, enemyBuild, squadron) => {
   if (squadron !== undefined) {
     enemyFighterPower = enemyFleets[1].landBaseCombatFighterPower;
     fighterPower = squadron.sortieFighterPower;
-    if (isCombinedFleetCombat) {
+    if (enemyBuild.isCombinedFleet) {
       enemyFighterPower += enemyFleets[2].landBaseCombatFighterPower;
     };
   } else {

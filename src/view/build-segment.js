@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
-import { Segment, Input, Header, Tab, Checkbox, Label, Button } from 'semantic-ui-react';
+import { Segment, Input, Header, Tab, Checkbox, Label, Button, Modal } from 'semantic-ui-react';
 import { user } from "./load-data";
 import { ShipSegment } from "./ship-segment";
+import { FleetSegment } from "./fleet-segment";
 import { EquipmentCard } from "./equipment-card";
 import { LandBaseSegment } from "./land-base-segment";
+import { AirStateSimulator  } from "./air-state-simulator";
 
-export class Build extends Component {
+export const BuildPage = props => {
+  const keys = [parseInt(props.match.params.key, 10)];
+  const build = user.getDataByKey(keys[0]);
+  if (!keys[0]) return false;
+  if (!build) return false;
+  return (
+    <BuildSegment build={build} keys={keys} />
+  );
+};
+
+export class BuildSegment extends Component {
   state = { key: Math.random() }
   update = () => this.setState({ key: Math.random() })
   render() {
-    const keys = [parseInt(this.props.match.params.key, 10)];
-    const build = user.getDataByKey(keys[0]);
-    if (!keys[0]) return false;
-    if (!build) return false;
+    const { build, keys } = this.props;
     return (
       <div>
         <BuildHeader build={build} />
         <div>
           <CombinedFleetSwitch build={build} update={this.update} />
           <EnemySwitch build={build} update={this.update} />
+          <ModalDisplayDeckBuilderData build={build} />
         </div>
         <BuildTab keys={keys} build={build} update={this.update} />
       </div>
@@ -96,6 +106,44 @@ const EnemySwitch = props => {
   );
 };
 
+const ModalDisplayDeckBuilderData = props => {
+  const { build } = props;
+  const handleCopy = () => {
+    const copyTextToClipboard = textVal => {
+      const copyFrom = document.createElement("textarea");
+      copyFrom.textContent = textVal;
+      const bodyElm = document.getElementsByTagName("body")[0];
+      bodyElm.appendChild(copyFrom);
+      copyFrom.select();
+      const retVal = document.execCommand('copy');
+      bodyElm.removeChild(copyFrom);
+      return retVal;
+    };
+    if (copyTextToClipboard(build.deckBuilderData)) {
+      alert('コピーしました');
+    } else {
+      alert('コピーに失敗しました');
+    };
+  };
+  const handleClick = () => {
+    const url = 'http://kancolle-calc.net/deckbuilder.html?predeck=' + build.deckBuilderData;
+    window.open(url);
+  };
+  return (
+    <Modal
+      trigger={<Button basic inverted size='tiny' >デッキビルダー形式で表示</Button>}
+      header='デッキビルダー形式のデータ'
+      content={build.deckBuilderData}
+      actions={[
+        { key: 'copy', icon: 'clipboard', content: 'クリップボードにコピー', basic: true, inverted: true, color: 'orange', onClick: handleCopy },
+        { key: 'open', icon: 'external', content: 'デッキビルダーで開く', basic: true, inverted: true, color: 'blue', onClick: handleClick },
+        { key: 'ok', icon: 'reply', content: 'OK', basic: true, inverted: true, color: 'blue' },
+      ]}
+      basic
+    />
+  );
+}
+
 const BuildTab = props => {
   const { keys, build, update } = props;
   let tab1Name, tab2Name;
@@ -112,6 +160,7 @@ const BuildTab = props => {
     { menuItem: '3', render: () => <FleetSegment keys={[...keys,3]} update={update} /> },
     { menuItem: '4', render: () => <FleetSegment keys={[...keys,4]} update={update} /> },
     { menuItem: '基地', render: () => <LandBaseSegment keys={[...keys,'landBase']} update={update} build={build} /> },
+    { menuItem: '制空シミュ', render: () => <AirStateSimulator build={build} /> }
   ];
   const handleChange = (event, data) => {
     sessionStorage['activeIndex' + keys[0]] = data.activeIndex;
@@ -126,45 +175,3 @@ const BuildTab = props => {
     />
   );
 }
-
-const FleetSegment = props => {
-  const { keys, update } = props;
-  const build = user.builds[keys[0]];
-  const fleet = build.fleets[keys[1]];
-  const style = {color: 'white', backgroundColor: "rgba( 200, 200, 200, 0.05 )", animation: "show 500ms"};
-  return (
-    <Tab.Pane attached={false} style={style} >
-      <span>{'制空値' + fleet.fighterPower}</span>
-      <span>{'　単縦艦隊防空' + build.getFleetAA('単縦')}</span>
-      {fleet.ships.map((ship, key) => {
-        if (key === 0) return;
-        return <ShipSegment build={build} keys={[...keys, key]} update={update} key={key} />
-      })}
-      <AddShipSpaceBtn fleet={fleet} update={update} />
-      <RemoveShipSpaceBtn fleet={fleet} update={update} />
-    </Tab.Pane>
-  );
-};
-
-const AddShipSpaceBtn = props => {
-  const { fleet, update } = props;
-  const handleClick = () => {
-    fleet.ships.push({});
-    update();
-  };
-  return (
-    <Button inverted basic icon='plus' onClick={handleClick} />
-  );
-};
-const RemoveShipSpaceBtn = props => {
-  const { fleet, update } = props;
-  const handleClick = () => {
-    console.log(fleet.ships);
-    if (fleet.ships.length <= 7) return;
-    fleet.ships.pop();
-    update();
-  };
-  return (
-    <Button inverted basic icon='minus' onClick={handleClick} />
-  );
-};

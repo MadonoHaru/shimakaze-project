@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Segment, Image, Divider, Checkbox } from 'semantic-ui-react';
+import { Button, Segment, Image, Divider, Checkbox, Popup } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { user, getParams, getShipImage } from "./load-data";
 import { ships_data } from '../data/ships-data';
@@ -59,9 +59,10 @@ export default class ShipList extends Component {
 }
 
 export const BackBtn = withRouter(props => {
-  const {build: bkey} = getParams();
+  const { build: bkey, page } = getParams();
   const handleClick = () => {
-    if (bkey) props.history.push("/build" + (bkey));
+    if (page) props.history.push('/' + page);
+    else if (bkey) props.history.push("/build" + (bkey));
     else props.history.push("/");
   };
   return (
@@ -163,9 +164,17 @@ const SelectShipBtn = withRouter(props => {
     props.history.push("/build" + (bkey));
   };
   return (
-    <Button style={style} inverted basic onClick={handleClick} >
-      <Image src={src} rounded />
-      <div>{ship.name}</div>
-    </Button>
+    <Popup
+      trigger={
+        <Button style={style} inverted basic onClick={handleClick} >
+          <Image src={src} rounded />
+          <div>{ship.name}</div>
+        </Button>
+      }
+      content={'id ' + ship.id}
+      style={{color: 'white', backgroundColor: "rgba( 50, 50, 50, 0.8 )"}}
+      basic
+    />
+
   );
 });

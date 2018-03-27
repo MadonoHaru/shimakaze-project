@@ -1,6 +1,9 @@
 import { Fleet } from './fleet';
 import { Squadron } from './squadron';
+import { CreateNewShip } from './ship';
+import { getInnerProficiencyByLevel, getProficiencyLevelByInner } from './equipment';
 import { ships_data } from '../data/ships-data';
+import { equipments_data } from '../data/equipments-data';
 import { map_data } from '../data/map-data';
 
 export class Build {
@@ -9,14 +12,18 @@ export class Build {
     for (let prop in build) {
       this[prop] = build[prop];
     };
-    for (let index in this.fleets) {
-      this.fleets[index] = new Fleet(this.fleets[index]);
-      this.fleets[index].key = index;
+    if (this.fleets) {
+      this.fleets = this.fleets.map((fleet, index) => {
+        fleet = new Fleet(fleet);
+        fleet.key = index;
+        fleet.parentObject = this;
+        return fleet;
+      });
+    } else {
+      this.fleets = [];
     };
-    const { squadrons } = this.landBase;
-    for (let index in squadrons ) {
-      squadrons[index] = new Squadron(squadrons[index]);
-    };
+    const { landBase } = this;
+    landBase.squadrons = landBase.squadrons.map(squadron => new Squadron(squadron));
 
     const handler = {
       set: (target, prop, value, receiver) => {
@@ -82,6 +89,36 @@ export class Build {
     if (!this.isEnemy) value = value / 1.3;
     return value;
   }
+
+  get deckBuilderData() {
+    const deckBuilderData = {version: 4};
+    this.fleets.forEach((fleet, fleetNum) => {
+      if (!fleet) return false;
+      const deckBuilderFleet = {};
+      fleet.ships.forEach((ship, shipNum) => {
+        if (!ship || !ship.id) return false;
+        const deckBuilderShip = {items: {}};
+        deckBuilderShip.id = ship.id;
+        deckBuilderShip.lv = ship.level;
+        deckBuilderShip.luck = ship.luck;
+        ship.equipments.forEach((equipment, equipmentNum) => {
+          const { id, improvement, proficiency } = equipment;
+          if (!id) return false;
+          const item = {id: id};
+          item.rf = improvement;
+          if (proficiency > 0) item.mas = getProficiencyLevelByInner(proficiency);
+          if (equipmentNum === 0) {
+            deckBuilderShip.items['ix'] = item;
+          } else {
+            deckBuilderShip.items['i' + equipmentNum] = item;
+          };
+        });
+        deckBuilderFleet['s' + shipNum] = deckBuilderShip;
+      });
+      deckBuilderData['f' + fleetNum] = deckBuilderFleet;
+    });
+    return JSON.stringify(deckBuilderData).replace('\'','\"');
+  }
 }
 
 export class CreateNewBuild {
@@ -118,5 +155,42 @@ export class CreateBuildByBuildData {
       };
     };
     return build;
+  }
+}
+
+export class CreateBuildByDeckBuilderData {
+  constructor(deckBuilderData) {
+    const newBuild = new CreateNewBuild('DeckBuilder');
+    const buildData = JSON.parse(deckBuilderData);
+    for (let prop in buildData) {
+      if (!/f\d/.test(prop)) continue;
+      const fleetNum = prop.replace(/[^0-9^\.]/g,"");
+      const fleet = buildData[prop];
+      for (let prop in fleet) {
+        if (!/s\d/.test(prop)) continue;
+        const shipNum = prop.replace(/[^0-9^\.]/g,"");
+        const ship = fleet[prop];
+        const newShip = new CreateNewShip(ships_data[ship.id]);
+        if (ship.lv > 0) newShip.level = ship.lv;
+        if (ship.luck > 0) newShip.luck = ship.luck;
+        for (let prop in ship.items) {
+          if (!/i\d/.test(prop) && prop !== 'ix') continue;
+          let itemNum = 0;
+          if (prop !== 'ix') itemNum = prop.replace(/[^0-9^\.]/g,"");
+          const item = ship.items[prop];
+          newShip.setEquipment(itemNum, equipments_data[item.id]);
+          const { rf, mas } = item;
+          if (rf) {
+            newShip.equipments[itemNum].improvement = parseInt(rf, 10);
+          };
+          if (mas) {
+            const proficiency = getInnerProficiencyByLevel(parseInt(mas, 10));
+            newShip.equipments[itemNum].proficiency = proficiency;
+          };
+        };
+        newBuild.fleets[fleetNum].ships[shipNum] = newShip;
+      };
+    };
+    return newBuild;
   }
 }

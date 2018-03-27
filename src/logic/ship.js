@@ -1,20 +1,30 @@
+import { Utility } from '../utility';
 import { ships_data } from '../data/ships-data';
 import { equipments_data } from '../data/equipments-data';
 import { Equipment } from './equipment';
 
-const ucfirst = str => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
 export class Ship {
   constructor(ship) {
     for (let prop in ship) {
-      this[prop] = ship[prop];
+      const value = ship[prop];
+      if (prop === 'aa' || prop === 'aaBase') prop = prop.replace('aa', 'antiAir');
+      if (prop.includes('Max')) {
+        prop = 'max' + Utility.ucfirst(prop.replace('Max', ''));
+      } else if (prop.includes('Base')) {
+        prop = 'base' + Utility.ucfirst(prop.replace('Base', ''));
+      };
+      this[prop] = value;
     };
-    for (let index in this.equipments) {
-      this.equipments[index] = new Equipment(this.equipments[index]);
-      this.equipments[index].slots = this.slots;
-      this.equipments[index].key = index;
+    if (this.equipments) {
+      this.equipments = this.equipments.map((equipment, index) => {
+        equipment = new Equipment(equipment);
+        equipment.slots = this.slots;
+        equipment.key = index;
+        equipment.parentObject = this;
+        return equipment;
+      });
+    } else {
+      this.equipments = [];
     };
     const getStateByLevel = (state, id, level) => {
       const getHpRiseValue = base => {
@@ -44,13 +54,12 @@ export class Ship {
         if (prop === 'level') {
           const { id, level } = target;
           target.hp = getStateByLevel('hp', id, level);
-          target.hpMax = getStateByLevel('hp', id, level);
-          for (let state of ['evasion','asw','los']) {
-            const nextState = getStateByLevel(state, id, level);
-            const equipmentsState = target.getEquipmentsStat(state);
-            console.log(equipmentsState);
-            target[state + 'Base'] = nextState;
-            target[state] = nextState + equipmentsState;
+          target.maxHp = getStateByLevel('hp', id, level);
+          for (let statName of ['evasion','asw','los']) {
+            const nextState = getStateByLevel(statName, id, level);
+            const equipmentsState = target.getEquipmentsStat(statName);
+            target['base' + Utility.ucfirst(statName)] = nextState;
+            target[statName] = nextState + equipmentsState;
           };
         };
         return bool;
@@ -59,6 +68,13 @@ export class Ship {
 
     return new Proxy(this, handler);
   }
+
+  toJSON = () => {
+    const cloneShip = { ...this };
+    delete cloneShip.parentObject;
+    return cloneShip;
+  };
+
   getEquipmentsStat = statName => {
     let statVal = 0;
     for (let equipment of this.equipments) {
@@ -68,7 +84,7 @@ export class Ship {
   }
 
   setRange = () => {
-    this.range = this.rangeBase;
+    this.range = this.baseRange;
     for (let equipment of this.equipments) {
       if ('range' in equipment) {
         if (this.range < equipment.range) this.range = equipment.range;
@@ -84,7 +100,7 @@ export class Ship {
     equipments[key].slots = this.slots;
     equipments[key].key = key;
     for (let state in equipment) {
-      if (['firepower','torpedo','aa','armor','evasion','asw','los'].includes(state)) {
+      if (['firepower','torpedo','antiAir','armor','evasion','asw','los'].includes(state)) {
         if (isNaN(this[state])) continue;
         this[state] += equipment[state];
       };
@@ -95,7 +111,7 @@ export class Ship {
   removeEquipment = key => {
     const equipment = this.equipments[key];
     for (let state in equipment) {
-      if (['firepower','torpedo','aa','armor','evasion','asw','los'].includes(state)) {
+      if (['firepower','torpedo','antiAir','armor','evasion','asw','los'].includes(state)) {
         if (isNaN(this[state])) continue;
         this[state] -= equipment[state];
       };
@@ -103,7 +119,6 @@ export class Ship {
     this.equipments[key] = {};
     this.setRange();
   }
-
   get weightAA() {
     let [value, num] = [0, 1];
     for (let equipment of this.equipments) {
@@ -111,8 +126,8 @@ export class Ship {
       value += equipment.weightAA;
       num = 2;
     };
-    if (this.isEnemy) value += Math.floor(Math.sqrt(this.aa) * 2);
-    else value = Math.floor((this.aaBase + value) / num) * num;
+    if (this.isEnemy) value += Math.floor(Math.sqrt(this.antiAir) * 2);
+    else value = Math.floor((this.baseAntiAir + value) / num) * num;
     return Math.floor(value);
   }
   get fleetAABonus() {
@@ -123,7 +138,6 @@ export class Ship {
     };
     return Math.floor(value);
   }
-
   get fighterPower() {
     if (this.hp < 0) return false;
     let val = 0;
@@ -161,6 +175,11 @@ export class Ship {
         randomNum += 0.65 * Math.floor(Math.random() * (maxNum + 1));
         randomNum = randomNum / 10;
       } else {
+        const minNum = airStateNum / 4;
+        randomNum = Math.floor(Math.sqrt(airStateNum / 3 * 100));
+        randomNum = Math.floor(Math.random() * (randomNum + 1)) / 100 + minNum;
+        randomNum = randomNum / 10;
+        /*256分割wiki式
         maxNum = airStateNum * 15;
         let minNum = 0;
         if (airStateNum <= 1) minNum = 7;
@@ -170,6 +189,7 @@ export class Ship {
         else minNum = 65;
         randomNum = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
         randomNum = randomNum / 256;
+        */
       };
       shotDownNum = Math.floor(slots[index - 1] * randomNum);
       slots[index - 1] -= shotDownNum;
@@ -202,48 +222,48 @@ export class Ship {
     if (!this.isEnemy) shotDownNum++;
     targetEquipment.slot -= shotDownNum;
     if (targetEquipment.slot <= 0) targetEquipment.slot = 0;
-  };
+  }
 
 }
 
 export class CreateNewShip {
   constructor(shipData) {
     shipData = JSON.parse(JSON.stringify(shipData));
-    for (let stateName in shipData) {
-      let value = shipData[stateName];
+    for (let statName in shipData) {
+      let value = shipData[statName];
       if (value === -1) value = '？'
-      switch (stateName) {
+      switch (statName) {
         case 'id':
         case 'name':
         case 'type':
         case 'luck':
         case 'torpedo_acc': {
-          this[stateName] = value;
+          this[statName] = value;
           break;
         }
         case 'hp':
         case 'fuel':
         case 'ammo':
         case 'slots': {
-          this[stateName + 'Max'] = value;
-          this[stateName] = value;
+          this['max' + Utility.ucfirst(statName)] = value;
+          this[statName] = value;
           break;
         }
         case 'firepower_max':
         case 'armor_max':
         case 'torpedo_max':
         case 'evasion_max':
-        case 'aa_max':
+        case 'antiAir_max':
         case 'asw_max':
         case 'los_max': {
-          this[stateName.replace('_max', '')] = value;
-          this[stateName.replace('_max', 'Base')] = value;
+          this[statName.replace('_max', '')] = value;
+          this['base' + Utility.ucfirst(statName.replace('_max', ''))] = value;
           break;
         }
         case 'speed':
         case 'range': {
-          this[stateName] = value;
-          this[stateName + 'Base'] = value;
+          this[statName] = value;
+          this['base' + Utility.ucfirst(statName)] = value;
           break;
         }
       };

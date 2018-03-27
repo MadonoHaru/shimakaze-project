@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { Segment, Image, Button, Input, Icon } from 'semantic-ui-react';
 import { Link , withRouter } from 'react-router-dom';
-import { user, getShipImage } from "./load-data";
+import { Utility } from '../utility';
+import { getShipImage } from "./load-data";
 import { EquipmentCard } from "./equipment-card";
 
 
 export class ShipSegment extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.state.ship = user.getDataByKey(...this.props.keys);
-  }
   render() {
     const style = {
       backgroundColor: "rgba( 255, 255, 255, 0.1 )",
@@ -18,11 +14,10 @@ export class ShipSegment extends Component {
       maxWidth: 1600
     };
     const { props } = this;
-    const ship = user.getDataByKey(...props.keys);
     return (
       <Segment style={style} inverted>
-        {ship.id
-          ? <ShipCard ship={ship} {...props} />
+        {props.ship.id
+          ? <ShipCard {...props} />
           : <CreateShipBtn {...props} />
         }
       </Segment>
@@ -47,27 +42,33 @@ const CreateShipBtn = props => {
 };
 
 const ShipCard = props => {
-  const { ship, keys, update } = props;
+  const { ship, keys, update, isShipStatusPage } = props;
   return (
     <div>
       <Image src={getShipImage(ship.id)} inline rounded style={{margin:5}} />
       {ship.name}
       <RemoveShipBtn {...props} />
       <div>
-        {ship.equipments.map((euqip, key)=>
-          <EquipmentCard keys={[...keys, key]} update={update} key={key} />)
-        }
-        <EquipmentCard keys={[...keys, 0]} update={update} expansion />
+        {ship.equipments.map((equipment, key)=>
+          <EquipmentCard key={key} holder={ship} equipment={equipment} keys={[...keys, key]} update={update} isShipStatusPage={isShipStatusPage} />
+        )}
+        <EquipmentCard holder={ship} equipment={ship.equipments[0]} keys={[...keys, 0]} update={update} expansion isShipStatusPage={isShipStatusPage} />
       </div>
       <ShipStatus {...props} />
+      <div>
+        <span>{'加重対空' + ship.weightAA}</span>
+        <span>{'　艦隊防空ボーナス' + ship.fleetAABonus}</span>
+      </div>
+      {!ship.isEnemy &&ship.id > 1500 && <div>味方側として計算しています</div>}
     </div>
   );
 };
 
 const RemoveShipBtn = props => {
-  const { keys, update } = props;
+  const { fleet, keys, update, isShipStatusPage } = props;
+  if (isShipStatusPage) return null;
   const removeClick = () => {
-    user.getDataByKey(keys[0],keys[1]).ships[keys[2]] = {};
+    fleet.ships[keys[2]] = {};
     update();
   };
   return (
@@ -80,21 +81,17 @@ const ShipStatus = props => {
   const style = {display: 'inline-block', margin: 5};
   return (
     <div>
+      <ShipStatusPageBtn keys={keys} />
       <div style={style} >
         Lv
         <InputStat {...props} statName={'level'} />
       </div>
-      {['hp','firepower','torpedo','aa','armor','evasion','asw','speed','los','range','luck'].map(stat =>
+      {['hp','firepower','torpedo','antiAir','armor','evasion','asw','speed','los','range','luck'].map(stat =>
         <div key={stat} style={style} >
-          <Image src={require(`../images/icons/${stat}.png`)} inline style={{filter: 'invert(100%)'}} />
+          <Image src={Utility.getStatIconSrc(stat)} inline style={{filter: 'invert(100%)'}} />
           {ship[stat]}
         </div>
       )}
-      <div>
-        <div style={style} >{'加重対空' + ship.weightAA}</div>
-        <div style={style} >{'艦隊防空ボーナス' + ship.fleetAABonus}</div>
-      </div>
-      {!ship.isEnemy &&ship.id > 1500 && <div style={style} >味方側として計算しています</div>}
     </div>
   );
 };
@@ -105,14 +102,25 @@ const InputStat = props => {
     ship[statName] = parseInt(event.target.value, 10);
     update();
   };
+  let min;
+  if (statName === 'level') min = 1;
   return (
     <Input
       type="number"
-      defaultValue={ship[statName]}
+      min={min}
+      value={ship[statName]}
       transparent
       inverted
       style={{width: 40}}
       onChange={handleChange}
     />
+  );
+};
+
+const ShipStatusPageBtn = props => {
+  const { keys } = props;
+  const query = `?build=${keys[0]}&fleet=${keys[1]}&ship=${keys[2]}`;
+  return (
+    <Link to={'/ship-status' + query} ><Icon name='info circle' style={{color: 'white'}} /></Link>
   );
 };
