@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { user } from "./load-data";
 import { ShipSegment } from "./ship-segment";
 import { CreateBuildByDeckBuilderData } from "../logic/build";
-import { getApi, getEventMapDataByWikia, getMapDataByKcwiki } from "../tools/source";
+import { getApi, getEventMapDataByWikia, getMapDataByKcwiki, csvToJson } from "../tools/source";
 
 
 export class TestPage extends Component {
@@ -21,6 +21,7 @@ export class TestPage extends Component {
     return (
       <Segment style={style} inverted >
         <Header inverted >テストページ</Header>
+        <TestBtn update={update} api={api} />
         <SourceTextArea update={update} api={api} />
         <WikiaEventTextArea update={update} api={api} />
         <KcwikiTextArea update={update} api={api} />
@@ -48,17 +49,35 @@ const SourceTextArea = props => {
   );
 }
 
+const TestBtn = props => {
+  const { api, update } = props;
+  const handleClick = () => {
+    const req = new XMLHttpRequest();
+    const csvPath = require('../data/ElectronicObserverRecord/EnemyFleetRecord.csv');
+    req.open("get", csvPath, true);
+    req.send(null);
+    req.onload = () => console.log(csvToJson(req.responseText));
+    update();
+  };
+  return (
+    <Form>
+      <Button onClick={handleClick} icon='download' inverted color='green' />
+    </Form>
+  );
+}
+
 const WikiaEventTextArea = props => {
   const { api, update } = props;
   const handleChange = (event, data) => {
     api.str = data.value;
   };
   const handleClick = () => {
-    api.str = JSON.stringify(getEventMapDataByWikia(api.str));
+    api.str = getEventMapDataByWikia(api.str);
     update();
   };
   return (
     <Form>
+      from event map of wikia
       <TextArea type='text' onChange={handleChange} />
       <Button onClick={handleClick} icon='download' inverted color='pink' />
     </Form>
@@ -71,11 +90,12 @@ const KcwikiTextArea = props => {
     api.str = data.value;
   };
   const handleClick = () => {
-    api.str = JSON.stringify(getMapDataByKcwiki(api.str));
+    api.str = getMapDataByKcwiki(api.str);
     update();
   };
   return (
     <Form>
+      from kcwiki
       <TextArea type='text' onChange={handleChange} />
       <Button onClick={handleClick} icon='download' inverted color='pink' />
     </Form>

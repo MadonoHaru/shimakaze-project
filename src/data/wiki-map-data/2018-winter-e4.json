@@ -1,0 +1,1294 @@
+﻿
+[{
+  "name": "E-4_A_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Echelon", "20% (10849/53411)"],
+      ["Line Abreast", "20% (10784/53411)"]
+    ],
+    "ships": [1571, 1570, 1570, 1570, 1570]
+  }, {
+    "formations": [
+      ["Echelon", "15% (7897/53411)"],
+      ["Line Abreast", "15% (8197/53411)"]
+    ],
+    "ships": [1571, 1571, 1570, 1570, 1570]
+  }, {
+    "formations": [
+      ["Echelon", "15% (7753/53411)"],
+      ["Line Abreast", "15% (7931/53411)"]
+    ],
+    "ships": [1571, 1571, 1571, 1570, 1570]
+  }]
+}, {
+  "name": "E-4_C_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "35% (2410/6818)"]
+    ],
+    "ships": [1616, 1523, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "40% (2729/6818)"]
+    ],
+    "ships": [1616, 1762, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "25% (1679/6818)"]
+    ],
+    "ships": [1616, 1762, 1762, 1592, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_D_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "9% (73/797)"]
+    ],
+    "ships": [1785, 1779, 1762, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "21% (169/797)"]
+    ],
+    "ships": [1785, 1779, 1779, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "70% (555/797)"]
+    ],
+    "ships": [1785, 1779, 1779, 1779, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_E_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "18% (9027/49558)"]
+    ],
+    "ships": [1616, 1523, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "30% (14693/49558)"]
+    ],
+    "ships": [1616, 1762, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "52% (25838/49558)"]
+    ],
+    "ships": [1616, 1762, 1762, 1592, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_F_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "35% (1948/5505)"],
+      ["Echelon", "29% (1586/5505)"]
+    ],
+    "ships": [1555, 1592, 1577, 1577, 1577, 1571]
+  }, {
+    "formations": [
+      ["Line Ahead", "36% (1971/5505)"]
+    ],
+    "ships": [1555, 1592, 1577, 1577, 1577, 1572]
+  }]
+}, {
+  "name": "E-4_G_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "56% (15/27)"]
+    ],
+    "ships": [1615, 1615, 1764, 1543, 1595, 1595]
+  }, {
+    "formations": [
+      ["Diamond", "19% (5/27)"]
+    ],
+    "ships": [1618, 1615, 1764, 1543, 1595, 1595]
+  }, {
+    "formations": [
+      ["Diamond", "26% (7/27)"]
+    ],
+    "ships": [1618, 1618, 1764, 1543, 1595, 1595]
+  }]
+}, {
+  "name": "E-4_H_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "35% (1779/5048)"],
+      ["Double Line", "35% (1772/5048)"],
+      ["Echelon", "30% (1497/5048)"]
+    ],
+    "ships": [1740, 1740, 1639, 1638, 1638, 1638]
+  }]
+}, {
+  "name": "E-4_I_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (19413/48982)"]
+    ],
+    "ships": [1780, 1764, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "35% (17319/48982)"]
+    ],
+    "ships": [1780, 1780, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "25% (12250/48982)"]
+    ],
+    "ships": [1780, 1764, 1764, 1764, 1740, 1740]
+  }]
+}, {
+  "name": "E-4_J_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "26% (265/1013)"]
+    ],
+    "ships": [1785, 1762, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "43% (437/1013)"]
+    ],
+    "ships": [1785, 1762, 1762, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "31% (311/1013)"]
+    ],
+    "ships": [1785, 1762, 1762, 1762, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_M_Hard",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "36% (1649/4636)"],
+      ["Echelon", "34% (1597/4636)"]
+    ],
+    "ships": [1639, 1639, 1639, 1638, 1638]
+  }, {
+    "formations": [
+      ["Line Ahead", "30% (1390/4636)"]
+    ],
+    "ships": [1639, 1639, 1639, 1638, 1638, 1638]
+  }]
+}, {
+  "name": "E-4_N_Hard",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "45% (1699/3736)"]
+    ],
+    "ships": [1567, 1529, 1529, 1529, 1743, 1743]
+  }, {
+    "formations": [
+      ["Line Ahead", "36% (1335/3736)"]
+    ],
+    "ships": [1567, 1529, 1529, 1529, 1595, 1595]
+  }, {
+    "formations": [
+      ["Line Ahead", "19% (702/3736)"]
+    ],
+    "ships": [1567, 1529, 1529, 1529, 1529, 1529]
+  }]
+}, {
+  "name": "E-4_O_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "45% (21329/47412)"]
+    ],
+    "ships": [1780, 1762, 1762, 1577, 1577, 1575]
+  }, {
+    "formations": [
+      ["Diamond", "35% (16499/47412)"]
+    ],
+    "ships": [1780, 1764, 1764, 1577, 1577, 1575]
+  }, {
+    "formations": [
+      ["Diamond", "20% (9584/47412)"]
+    ],
+    "ships": [1780, 1764, 1762, 1762, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_P_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "59% (890/1498)"]
+    ],
+    "ships": [1780, 1764, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "26% (390/1498)"]
+    ],
+    "ships": [1780, 1780, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "15% (218/1498)"]
+    ],
+    "ships": [1780, 1764, 1764, 1764, 1740, 1740]
+  }]
+}, {
+  "name": "E-4_Q_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "41% (16973/41728)"]
+    ],
+    "ships": [1780, 1764, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "22% (9222/41728)"]
+    ],
+    "ships": [1780, 1780, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "37% (15533/41728)"]
+    ],
+    "ships": [1780, 1764, 1764, 1764, 1740, 1740]
+  }]
+}, {
+  "name": "E-4_R_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "74% (23198/31319)"]
+    ],
+    "ships": [1529, 1529, 1529, 1524, 1524, 1524],
+    "escortShips": [1555, 1592, 1577, 1577, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "26% (8121/31319)"]
+    ],
+    "ships": [1567, 1529, 1529, 1524, 1524, 1524],
+    "escortShips": [1555, 1592, 1740, 1740, 1740, 1740]
+  }]
+}, {
+  "name": "E-4_T_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (4/10)"]
+    ],
+    "ships": [1618, 1618, 1762, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "40% (4/10)"]
+    ],
+    "ships": [1618, 1618, 1764, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "20% (2/10)"]
+    ],
+    "ships": [1618, 1618, 1779, 1592, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_V_Hard",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "23% (17/75)"]
+    ],
+    "ships": [1618, 1618, 1762, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "47% (35/75)"]
+    ],
+    "ships": [1618, 1618, 1764, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "31% (23/75)"]
+    ],
+    "ships": [1618, 1618, 1779, 1592, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_W_Hard",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "29% (16/55)"]
+    ],
+    "ships": [1618, 1618, 1762, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "45% (25/55)"]
+    ],
+    "ships": [1618, 1618, 1764, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "25% (14/55)"]
+    ],
+    "ships": [1618, 1618, 1779, 1592, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_X_Hard",
+  "type": "Boss Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "78% (17793/22839)"]
+    ],
+    "ships": [1785, 1780, 1558, 1558, 1529, 1529],
+    "escortShips": [1595, 1595, 1740, 1740, 1740, 1740]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "22% (5046/22839)"]
+    ],
+    "ships": [1788, 1780, 1558, 1558, 1567, 1567],
+    "escortShips": [1595, 1595, 1743, 1743, 1743, 1743]
+  }]
+}, {
+  "name": "E-4_A_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Echelon", "20% (16030/79945)"],
+      ["Line Abreast", "20% (15861/79945)"]
+    ],
+    "ships": [1571, 1570, 1570, 1570]
+  }, {
+    "formations": [
+      ["Echelon", "20% (15785/79945)"],
+      ["Line Abreast", "20% (16384/79945)"]
+    ],
+    "ships": [1571, 1570, 1570, 1570, 1570]
+  }, {
+    "formations": [
+      ["Echelon", "10% (7810/79945)"],
+      ["Line Abreast", "10% (8075/79945)"]
+    ],
+    "ships": [1571, 1571, 1570, 1570, 1570]
+  }]
+}, {
+  "name": "E-4_C_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "35% (2770/7993)"]
+    ],
+    "ships": [1614, 1510, 1510, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "40% (3215/7993)"]
+    ],
+    "ships": [1614, 1523, 1510, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "25% (2008/7993)"]
+    ],
+    "ships": [1614, 1523, 1523, 1591, 1576, 1576]
+  }]
+}, {
+  "name": "E-4_D_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "13% (243/1877)"]
+    ],
+    "ships": [1785, 1779, 1762, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "26% (484/1877)"]
+    ],
+    "ships": [1785, 1779, 1779, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "40% (756/1877)"]
+    ],
+    "ships": [1784, 1779, 1762, 1762, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "21% (394/1877)"]
+    ],
+    "ships": [1785, 1779, 1779, 1779, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_E_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "19% (14462/75770)"]
+    ],
+    "ships": [1614, 1523, 1523, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "20% (15313/75770)"]
+    ],
+    "ships": [1616, 1523, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "32% (24599/75770)"]
+    ],
+    "ships": [1616, 1762, 1523, 1592, 1577, 1577]
+  }, {
+    "formations": [
+      ["Diamond", "28% (21396/75770)"]
+    ],
+    "ships": [1616, 1762, 1762, 1592, 1577, 1577]
+  }]
+}, {
+  "name": "E-4_F_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "36% (2662/7426)"],
+      ["Echelon", "39% (2922/7426)"]
+    ],
+    "ships": [1554, 1591, 1576, 1576, 1501, 1570]
+  }, {
+    "formations": [
+      ["Line Ahead", "25% (1842/7426)"]
+    ],
+    "ships": [1554, 1591, 1576, 1576, 1501, 1571]
+  }]
+}, {
+  "name": "E-4_G_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "2% (2/124)"]
+    ],
+    "ships": [1615, 1615, 1762, 1542, 1594, 1594]
+  }, {
+    "formations": [
+      ["Diamond", "48% (59/124)"]
+    ],
+    "ships": [1615, 1615, 1764, 1543, 1595, 1595]
+  }, {
+    "formations": [
+      ["Diamond", "28% (35/124)"]
+    ],
+    "ships": [1618, 1615, 1764, 1543, 1595, 1595]
+  }, {
+    "formations": [
+      ["Diamond", "23% (28/124)"]
+    ],
+    "ships": [1618, 1618, 1764, 1543, 1595, 1595]
+  }]
+}, {
+  "name": "E-4_H_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "25% (1714/6955)"],
+      ["Double Line", "35% (2435/6955)"],
+      ["Echelon", "40% (2806/6955)"]
+    ],
+    "ships": [1576, 1576, 1638, 1637, 1637, 1637]
+  }]
+}, {
+  "name": "E-4_I_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (29666/74689)"]
+    ],
+    "ships": [1762, 1762, 1523, 1739, 1739, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "35% (26334/74689)"]
+    ],
+    "ships": [1764, 1764, 1762, 1739, 1739, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "25% (18689/74689)"]
+    ],
+    "ships": [1764, 1762, 1762, 1762, 1739, 1739]
+  }]
+}, {
+  "name": "E-4_J_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "24% (285/1194)"]
+    ],
+    "ships": [1784, 1523, 1523, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "44% (529/1194)"]
+    ],
+    "ships": [1784, 1762, 1523, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "32% (380/1194)"]
+    ],
+    "ships": [1784, 1762, 1523, 1523, 1576, 1576]
+  }]
+}, {
+  "name": "E-4_M_Medium",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "35% (2343/6627)"],
+      ["Echelon", "35% (2291/6627)"]
+    ],
+    "ships": [1639, 1638, 1637, 1637]
+  }, {
+    "formations": [
+      ["Line Ahead", "30% (1993/6627)"]
+    ],
+    "ships": [1639, 1638, 1638, 1637, 1637]
+  }]
+}, {
+  "name": "E-4_N_Medium",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "45% (2538/5698)"]
+    ],
+    "ships": [1529, 1529, 1524, 1524, 1739, 1739]
+  }, {
+    "formations": [
+      ["Line Ahead", "36% (2023/5698)"]
+    ],
+    "ships": [1529, 1529, 1524, 1524, 1594, 1594]
+  }, {
+    "formations": [
+      ["Line Ahead", "20% (1137/5698)"]
+    ],
+    "ships": [1529, 1529, 1529, 1529, 1524, 1524]
+  }]
+}, {
+  "name": "E-4_O_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "45% (33267/73680)"]
+    ],
+    "ships": [1762, 1762, 1523, 1576, 1576, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (25641/73680)"]
+    ],
+    "ships": [1764, 1762, 1762, 1576, 1576, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "20% (14772/73680)"]
+    ],
+    "ships": [1764, 1762, 1762, 1523, 1576, 1576]
+  }]
+}, {
+  "name": "E-4_P_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "59% (101/170)"]
+    ],
+    "ships": [1762, 1762, 1523, 1739, 1739, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "24% (41/170)"]
+    ],
+    "ships": [1764, 1764, 1762, 1739, 1739, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "16% (28/170)"]
+    ],
+    "ships": [1764, 1762, 1762, 1762, 1739, 1739]
+  }]
+}, {
+  "name": "E-4_Q_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "45% (31435/70481)"]
+    ],
+    "ships": [1780, 1764, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "24% (16858/70481)"]
+    ],
+    "ships": [1780, 1780, 1764, 1743, 1740, 1740]
+  }, {
+    "formations": [
+      ["Diamond", "19% (13732/70481)"]
+    ],
+    "ships": [1764, 1762, 1762, 1762, 1739, 1739]
+  }, {
+    "formations": [
+      ["Diamond", "12% (8456/70481)"]
+    ],
+    "ships": [1780, 1764, 1764, 1764, 1740, 1740]
+  }]
+}, {
+  "name": "E-4_R_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "78% (45387/58117)"]
+    ],
+    "ships": [1529, 1529, 1524, 1524, 1524, 1524],
+    "escortShips": [1554, 1591, 1576, 1576, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "22% (12730/58117)"]
+    ],
+    "ships": [1529, 1529, 1529, 1524, 1524, 1524],
+    "escortShips": [1554, 1591, 1739, 1739, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_T_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (8/20)"]
+    ],
+    "ships": [1615, 1762, 1591, 1576, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "40% (8/20)"]
+    ],
+    "ships": [1615, 1762, 1762, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "20% (4/20)"]
+    ],
+    "ships": [1615, 1615, 1762, 1591, 1576, 1576]
+  }]
+}, {
+  "name": "E-4_V_Medium",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "25% (19/76)"]
+    ],
+    "ships": [1615, 1762, 1591, 1576, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "49% (37/76)"]
+    ],
+    "ships": [1615, 1762, 1762, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "26% (20/76)"]
+    ],
+    "ships": [1615, 1615, 1762, 1591, 1576, 1576]
+  }]
+}, {
+  "name": "E-4_W_Medium",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "32% (22/69)"]
+    ],
+    "ships": [1615, 1762, 1591, 1576, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "38% (26/69)"]
+    ],
+    "ships": [1615, 1762, 1762, 1591, 1576, 1576]
+  }, {
+    "formations": [
+      ["Diamond", "30% (21/69)"]
+    ],
+    "ships": [1615, 1615, 1762, 1591, 1576, 1576]
+  }]
+}, {
+  "name": "E-4_X_Medium",
+  "type": "Boss Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "78% (33795/43322)"]
+    ],
+    "ships": [1784, 1558, 1558, 1558, 1529, 1529],
+    "escortShips": [1594, 1594, 1576, 1576, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "22% (9527/43322)"]
+    ],
+    "ships": [1787, 1780, 1558, 1558, 1529, 1529],
+    "escortShips": [1594, 1594, 1739, 1739, 1739, 1739]
+  }]
+}, {
+  "name": "E-4_A_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Echelon", "70% (48052/68617)"]
+    ],
+    "ships": [1570, 1570, 1570]
+  }, {
+    "formations": [
+      ["Echelon", "15% (10347/68617)"],
+      ["Line Abreast", "15% (10218/68617)"]
+    ],
+    "ships": [1571, 1570, 1570, 1570]
+  }]
+}, {
+  "name": "E-4_C_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "45% (3578/7945)"]
+    ],
+    "ships": [1525, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "30% (2403/7945)"]
+    ],
+    "ships": [1528, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "25% (1964/7945)"]
+    ],
+    "ships": [1528, 1523, 1523, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_D_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "30% (503/1675)"]
+    ],
+    "ships": [1783, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "30% (506/1675)"]
+    ],
+    "ships": [1783, 1523, 1523, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "40% (666/1675)"]
+    ],
+    "ships": [1783, 1762, 1523, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_E_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "35% (23830/67151)"]
+    ],
+    "ships": [1525, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "27% (17852/67151)"]
+    ],
+    "ships": [1528, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "38% (25469/67151)"]
+    ],
+    "ships": [1528, 1523, 1523, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_F_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "35% (2604/7336)"],
+      ["Echelon", "40% (2954/7336)"]
+    ],
+    "ships": [1554, 1591, 1501, 1501, 1570]
+  }, {
+    "formations": [
+      ["Line Ahead", "24% (1778/7336)"]
+    ],
+    "ships": [1554, 1591, 1575, 1501, 1501, 1570]
+  }]
+}, {
+  "name": "E-4_G_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "49% (270/553)"]
+    ],
+    "ships": [1512, 1512, 1762, 1541, 1509, 1509]
+  }, {
+    "formations": [
+      ["Diamond", "30% (166/553)"]
+    ],
+    "ships": [1525, 1525, 1762, 1541, 1509, 1509]
+  }, {
+    "formations": [
+      ["Diamond", "21% (117/553)"]
+    ],
+    "ships": [1615, 1525, 1762, 1541, 1509, 1509]
+  }]
+}, {
+  "name": "E-4_H_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "25% (1742/6959)"],
+      ["Double Line", "35% (2444/6959)"],
+      ["Echelon", "40% (2773/6959)"]
+    ],
+    "ships": [1501, 1501, 1638, 1637, 1637]
+  }]
+}, {
+  "name": "E-4_I_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (26679/66921)"]
+    ],
+    "ships": [1762, 1510, 1510, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (23329/66921)"]
+    ],
+    "ships": [1762, 1523, 1523, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "25% (16913/66921)"]
+    ],
+    "ships": [1762, 1762, 1523, 1523, 1739, 1739]
+  }]
+}, {
+  "name": "E-4_J_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "42% (622/1485)"]
+    ],
+    "ships": [1783, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "29% (438/1485)"]
+    ],
+    "ships": [1783, 1523, 1523, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "29% (425/1485)"]
+    ],
+    "ships": [1783, 1762, 1523, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_M_Easy",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "36% (2381/6638)"],
+      ["Echelon", "34% (2268/6638)"]
+    ],
+    "ships": [1638, 1637, 1637, 1637]
+  }, {
+    "formations": [
+      ["Line Ahead", "30% (1989/6638)"]
+    ],
+    "ships": [1638, 1638, 1637, 1637]
+  }]
+}, {
+  "name": "E-4_N_Easy",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (1979/4919)"]
+    ],
+    "ships": [1529, 1524, 1524, 1524, 1575, 1575]
+  }, {
+    "formations": [
+      ["Diamond", "35% (1714/4919)"]
+    ],
+    "ships": [1529, 1524, 1524, 1524, 1594, 1594]
+  }, {
+    "formations": [
+      ["Diamond", "25% (1226/4919)"]
+    ],
+    "ships": [1529, 1529, 1524, 1524, 1524, 1524]
+  }]
+}, {
+  "name": "E-4_O_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "45% (29856/66602)"]
+    ],
+    "ships": [1762, 1510, 1510, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (23432/66602)"]
+    ],
+    "ships": [1762, 1523, 1523, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "20% (13314/66602)"]
+    ],
+    "ships": [1762, 1523, 1523, 1523, 1575, 1575]
+  }]
+}, {
+  "name": "E-4_P_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "52% (83/161)"]
+    ],
+    "ships": [1762, 1510, 1510, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "37% (59/161)"]
+    ],
+    "ships": [1762, 1523, 1523, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "12% (19/161)"]
+    ],
+    "ships": [1762, 1762, 1523, 1523, 1739, 1739]
+  }]
+}, {
+  "name": "E-4_Q_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "40% (26142/66066)"]
+    ],
+    "ships": [1762, 1510, 1510, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "36% (23654/66066)"]
+    ],
+    "ships": [1762, 1523, 1523, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "25% (16270/66066)"]
+    ],
+    "ships": [1762, 1523, 1523, 1523, 1739, 1739]
+  }]
+}, {
+  "name": "E-4_R_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "89% (57090/64240)"]
+    ],
+    "ships": [1524, 1524, 1524, 1524, 1511, 1511],
+    "escortShips": [1554, 1591, 1501, 1501, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "11% (7150/64240)"]
+    ],
+    "ships": [1529, 1524, 1524, 1524, 1524, 1524],
+    "escortShips": [1554, 1591, 1575, 1501, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_T_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "31% (48/153)"]
+    ],
+    "ships": [1615, 1591, 1575, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "34% (52/153)"]
+    ],
+    "ships": [1615, 1523, 1591, 1575, 1575, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (53/153)"]
+    ],
+    "ships": [1615, 1523, 1523, 1591, 1575, 1575]
+  }]
+}, {
+  "name": "E-4_V_Easy",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "34% (35/103)"]
+    ],
+    "ships": [1615, 1591, 1575, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "32% (33/103)"]
+    ],
+    "ships": [1615, 1523, 1591, 1575, 1575, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "34% (35/103)"]
+    ],
+    "ships": [1615, 1523, 1523, 1591, 1575, 1575]
+  }]
+}, {
+  "name": "E-4_W_Easy",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "33% (33/100)"]
+    ],
+    "ships": [1615, 1591, 1575, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "32% (32/100)"]
+    ],
+    "ships": [1615, 1523, 1591, 1575, 1575, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (35/100)"]
+    ],
+    "ships": [1615, 1523, 1523, 1591, 1575, 1575]
+  }]
+}, {
+  "name": "E-4_X_Easy",
+  "type": "Boss Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "90% (47323/52531)"]
+    ],
+    "ships": [1783, 1526, 1526, 1526, 1524, 1524],
+    "escortShips": [1594, 1575, 1575, 1501, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "10% (5208/52531)"]
+    ],
+    "ships": [1786, 1526, 1526, 1526, 1529, 1529],
+    "escortShips": [1594, 1575, 1575, 1501, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_A_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Echelon", "100% (45387/45387)"]
+    ],
+    "ships": [1570, 1570, 1570]
+  }]
+}, {
+  "name": "E-4_C_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "66% (4839/7365)"]
+    ],
+    "ships": [1525, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "34% (2526/7365)"]
+    ],
+    "ships": [1528, 1510, 1510, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_D_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "65% (131/201)"]
+    ],
+    "ships": [1783, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (70/201)"]
+    ],
+    "ships": [1783, 1523, 1523, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_E_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "65% (29363/45078)"]
+    ],
+    "ships": [1525, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (15715/45078)"]
+    ],
+    "ships": [1528, 1510, 1510, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_F_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "30% (2113/7035)"],
+      ["Echelon", "70% (4922/7035)"]
+    ],
+    "ships": [1554, 1591, 1501, 1501, 1570]
+  }]
+}, {
+  "name": "E-4_G_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "74% (136/183)"]
+    ],
+    "ships": [1512, 1512, 1762, 1541, 1509, 1509]
+  }, {
+    "formations": [
+      ["Diamond", "26% (47/183)"]
+    ],
+    "ships": [1525, 1525, 1762, 1541, 1509, 1509]
+  }]
+}, {
+  "name": "E-4_H_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Double Line", "30% (2004/6700)"],
+      ["Echelon", "70% (4696/6700)"]
+    ],
+    "ships": [1501, 1501, 1638, 1637, 1637]
+  }]
+}, {
+  "name": "E-4_I_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "65% (29258/44961)"]
+    ],
+    "ships": [1762, 1510, 1510, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (15703/44961)"]
+    ],
+    "ships": [1762, 1523, 1523, 1739, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_J_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "65% (1496/2299)"]
+    ],
+    "ships": [1783, 1510, 1510, 1591, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (803/2299)"]
+    ],
+    "ships": [1783, 1523, 1523, 1591, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_M_Casual",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Line Ahead", "40% (1986/4987)"],
+      ["Echelon", "60% (3001/4987)"]
+    ],
+    "ships": [1638, 1637, 1637, 1637]
+  }]
+}, {
+  "name": "E-4_N_Casual",
+  "type": "Night Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "63% (1646/2600)"]
+    ],
+    "ships": [1529, 1524, 1524, 1524, 1575, 1575]
+  }, {
+    "formations": [
+      ["Diamond", "37% (954/2600)"]
+    ],
+    "ships": [1529, 1524, 1524, 1524, 1594, 1594]
+  }]
+}, {
+  "name": "E-4_O_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "65% (29031/44810)"]
+    ],
+    "ships": [1762, 1510, 1510, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (15779/44810)"]
+    ],
+    "ships": [1762, 1523, 1523, 1575, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_P_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "64% (67/105)"]
+    ],
+    "ships": [1762, 1510, 1510, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "36% (38/105)"]
+    ],
+    "ships": [1762, 1523, 1523, 1739, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_Q_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "65% (29018/44489)"]
+    ],
+    "ships": [1762, 1510, 1510, 1739, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "35% (15471/44489)"]
+    ],
+    "ships": [1762, 1523, 1523, 1739, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_R_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "96% (41936/43547)"]
+    ],
+    "ships": [1524, 1524, 1511, 1511, 1511, 1511],
+    "escortShips": [1518, 1501, 1501, 1501, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "4% (1611/43547)"]
+    ],
+    "ships": [1524, 1524, 1524, 1511, 1511, 1511],
+    "escortShips": [1518, 1591, 1501, 1501, 1501, 1501]
+  }]
+}, {
+  "name": "E-4_T_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "59% (71/120)"]
+    ],
+    "ships": [1615, 1591, 1575, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "41% (49/120)"]
+    ],
+    "ships": [1615, 1523, 1591, 1575, 1575, 1501]
+  }]
+}, {
+  "name": "E-4_V_Casual",
+  "type": "Air Defense",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "50% (22/44)"]
+    ],
+    "ships": [1615, 1591, 1575, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "50% (22/44)"]
+    ],
+    "ships": [1615, 1523, 1591, 1575, 1575, 1501]
+  }]
+}, {
+  "name": "E-4_W_Casual",
+  "type": "Normal Battle",
+  "fleets": [{
+    "formations": [
+      ["Diamond", "74% (29/39)"]
+    ],
+    "ships": [1615, 1591, 1575, 1575, 1501, 1501]
+  }, {
+    "formations": [
+      ["Diamond", "26% (10/39)"]
+    ],
+    "ships": [1615, 1523, 1591, 1575, 1575, 1501]
+  }]
+}, {
+  "name": "E-4_X_Casual",
+  "type": "Boss Battle",
+  "fleets": [{
+    "formations": [
+      ["Cruising Formation 4", "97% (37525/38718)"]
+    ],
+    "ships": [1783, 1513, 1513, 1513, 1524, 1524],
+    "escortShips": [1575, 1575, 1501, 1501, 1501, 1501]
+  }, {
+    "formations": [
+      ["Cruising Formation 4", "3% (1193/38718)"]
+    ],
+    "ships": [1786, 1526, 1526, 1526, 1524, 1524],
+    "escortShips": [1594, 1575, 1575, 1501, 1501, 1501]
+  }]
+}]
