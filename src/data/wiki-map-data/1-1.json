@@ -1,1 +1,41 @@
-﻿[{"cellName":"A","fleetName":"敵偵察艦","builds":[{"fleet1":[1501],"formation":"单纵"},{"fleet1":[1502],"formation":"单纵"},{"fleet1":[1503],"formation":"单纵"}]},{"cellName":"B","fleetName":"敵はぐれ艦隊","builds":[{"fleet1":[1501,1501],"formation":"单纵"},{"fleet1":[1502,1501],"formation":"单纵"},{"fleet1":[1503,1503],"formation":"单纵"}]},{"cellName":"C","fleetName":"敵主力艦隊","builds":[{"fleet1":[1505,1501,1501],"formation":"单纵"},{"fleet1":[1505,1502,1502],"formation":"单纵"},{"fleet1":[1505,1503,1502,1502],"formation":"单纵"}]}]
+﻿
+[{
+  "cellName": "A",
+  "fleetName": "敵偵察艦",
+  "builds": [{
+    "fleet1": [1501],
+    "formation": "单纵"
+  }, {
+    "fleet1": [1502],
+    "formation": "单纵"
+  }, {
+    "fleet1": [1503],
+    "formation": "单纵"
+  }]
+}, {
+  "cellName": "B",
+  "fleetName": "敵はぐれ艦隊",
+  "builds": [{
+    "fleet1": [1501, 1501],
+    "formation": "单纵"
+  }, {
+    "fleet1": [1502, 1501],
+    "formation": "单纵"
+  }, {
+    "fleet1": [1503, 1503],
+    "formation": "单纵"
+  }]
+}, {
+  "cellName": "C",
+  "fleetName": "敵主力艦隊",
+  "builds": [{
+    "fleet1": [1505, 1501, 1501],
+    "formation": "单纵"
+  }, {
+    "fleet1": [1505, 1502, 1502],
+    "formation": "单纵"
+  }, {
+    "fleet1": [1505, 1503, 1502, 1502],
+    "formation": "单纵"
+  }]
+}]

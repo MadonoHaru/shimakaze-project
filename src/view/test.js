@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { user } from "./load-data";
 import { ShipSegment } from "./ship-segment";
 import { CreateBuildByDeckBuilderData } from "../logic/build";
-import { getApi, getEventMapDataByWikia, getMapDataByKcwiki, csvToJson } from "../tools/source";
+import { getApi, getEventMapDataByWikia, getMapDataByKcwiki, getWikiEventMaps } from "../tools/source";
 
 
 export class TestPage extends Component {
@@ -16,7 +16,6 @@ export class TestPage extends Component {
       backgroundColor: "rgba( 255, 255, 255, 0.1 )",
       animation: "show 500ms",
     };
-    const ship = user.builds[1].fleets[1].ships[1];
     const { update, api } = this;
     return (
       <Segment style={style} inverted >
@@ -52,15 +51,12 @@ const SourceTextArea = props => {
 const TestBtn = props => {
   const { api, update } = props;
   const handleClick = () => {
-    const req = new XMLHttpRequest();
-    const csvPath = require('../data/ElectronicObserverRecord/EnemyFleetRecord.csv');
-    req.open("get", csvPath, true);
-    req.send(null);
-    req.onload = () => console.log(csvToJson(req.responseText));
+    api.str = JSON.stringify(getWikiEventMaps());
     update();
   };
   return (
     <Form>
+      test
       <Button onClick={handleClick} icon='download' inverted color='green' />
     </Form>
   );
